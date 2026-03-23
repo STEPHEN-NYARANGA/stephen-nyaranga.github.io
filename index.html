@@ -7,611 +7,304 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-base: #f0f6fb;
-    --bg-white: #ffffff;
-    --bg-alt: #e8f1f8;
-    --bg-cream: #f5f9fd;
-    --accent: #1b6ca8;
-    --accent-light: #2a83c4;
-    --accent-dark: #134e7a;
-    --accent-bg: rgba(27,108,168,0.06);
-    --accent-border: rgba(27,108,168,0.16);
-    --warm: #b5702a;
-    --warm-bg: rgba(181,112,42,0.08);
-    --warm-border: rgba(181,112,42,0.2);
-    --slate: #4a6278;
-    --text-primary: #152231;
-    --text-body: #364757;
-    --text-secondary: #5a7189;
-    --text-muted: #8a9fb4;
-    --border: #cddbe8;
-    --border-light: #dde8f0;
-    --shadow-sm: 0 1px 3px rgba(21,34,49,0.04);
-    --shadow-md: 0 4px 20px rgba(21,34,49,0.06);
-    --shadow-lg: 0 12px 40px rgba(21,34,49,0.08);
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{color:var(--text-body);font-family:'Nunito Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
-  ::selection{background:var(--accent);color:#fff}
-
-  /* ========== ANIMATED GRADIENT BACKGROUND ========== */
-  .page-bg {
-    position:fixed;inset:0;z-index:0;
-    background: linear-gradient(135deg, #e8f4fd, #f0f6fb, #ddedf9, #ecf3fa, #d8e8f5, #f2f7fc);
-    background-size: 400% 400%;
-    animation: gradientShift 18s ease infinite;
-  }
-  @keyframes gradientShift {
-    0%{background-position:0% 50%}
-    25%{background-position:100% 25%}
-    50%{background-position:100% 50%}
-    75%{background-position:0% 75%}
-    100%{background-position:0% 50%}
-  }
-
-  /* Grain overlay */
+  :root{--bg-base:#f0f6fb;--bg-white:#fff;--bg-alt:#e8f1f8;--bg-cream:#f5f9fd;--accent:#1b6ca8;--accent-light:#2a83c4;--accent-dark:#134e7a;--accent-bg:rgba(27,108,168,0.06);--accent-border:rgba(27,108,168,0.16);--warm:#b5702a;--warm-bg:rgba(181,112,42,0.08);--warm-border:rgba(181,112,42,0.2);--text-primary:#152231;--text-body:#364757;--text-secondary:#5a7189;--text-muted:#8a9fb4;--border:#cddbe8;--border-light:#dde8f0;--shadow-sm:0 1px 3px rgba(21,34,49,0.04);--shadow-md:0 4px 20px rgba(21,34,49,0.06);--shadow-lg:0 12px 40px rgba(21,34,49,0.08)}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{color:var(--text-body);font-family:'Nunito Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}::selection{background:var(--accent);color:#fff}
+  .page-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,#e8f4fd,#f0f6fb,#ddedf9,#ecf3fa,#d8e8f5,#f2f7fc);background-size:400% 400%;animation:gradientShift 18s ease infinite}
+  @keyframes gradientShift{0%{background-position:0% 50%}25%{background-position:100% 25%}50%{background-position:100% 50%}75%{background-position:0% 75%}100%{background-position:0% 50%}}
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.014'/%3E%3C/svg%3E");pointer-events:none;z-index:10000}
-
-  /* All content above the animated bg */
-  nav, section, footer { position: relative; z-index: 1; }
-
-  /* ========== NAV ========== */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(240,246,251,0.88);backdrop-filter:blur(22px);border-bottom:1px solid var(--border-light);transition:all .4s ease}
+  nav,section,footer{position:relative;z-index:1}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(240,246,251,0.88);backdrop-filter:blur(22px);border-bottom:1px solid var(--border-light);transition:all .4s}
   nav.scrolled{padding:.7rem 3rem;background:rgba(240,246,251,0.96);box-shadow:var(--shadow-sm)}
-  .nav-logo{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;color:var(--text-primary);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
-  .nav-logo span{color:var(--accent)}
-  .nav-right{display:flex;gap:1.6rem;align-items:center;margin-left:auto;flex-wrap:nowrap}
-  .nav-right a{color:var(--text-secondary);text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:color .3s;position:relative;white-space:nowrap}
-  .nav-right a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s ease}
-  .nav-right a:hover{color:var(--accent)}
-  .nav-right a:hover::after{width:100%}
-  .nav-cta{background:var(--accent)!important;color:#fff!important;padding:.42rem 1rem;border-radius:6px;font-weight:700!important;transition:transform .2s,box-shadow .3s!important}
-  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(27,108,168,0.25)}
-  .nav-cta::after{display:none!important}
-
-  .hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;z-index:200}
-  .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;transition:all .3s}
-
-  /* ========== HERO ========== */
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;color:var(--text-primary);text-decoration:none;white-space:nowrap}.nav-logo span{color:var(--accent)}
+  .nav-right{display:flex;gap:1.5rem;align-items:center;margin-left:auto;flex-wrap:nowrap}
+  .nav-right a{color:var(--text-secondary);text-decoration:none;font-size:.76rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:color .3s;position:relative;white-space:nowrap}
+  .nav-right a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s}.nav-right a:hover{color:var(--accent)}.nav-right a:hover::after{width:100%}
+  .nav-cta{background:var(--accent)!important;color:#fff!important;padding:.42rem 1rem;border-radius:6px;font-weight:700!important;transition:transform .2s,box-shadow .3s!important}.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(27,108,168,0.25)}.nav-cta::after{display:none!important}
+  .hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;z-index:200}.hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;transition:all .3s}
   .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:6rem 3rem 4rem;overflow:hidden}
-  .hero-deco{position:absolute;border-radius:50%;pointer-events:none}
-  .hero-deco.one{width:550px;height:550px;background:radial-gradient(circle,rgba(27,108,168,0.06) 0%,transparent 70%);top:-8%;right:-10%}
-  .hero-deco.two{width:420px;height:420px;background:radial-gradient(circle,rgba(181,112,42,0.04) 0%,transparent 70%);bottom:-5%;left:-6%}
-  .hero-topo{position:absolute;inset:0;opacity:.022;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='200' cy='200' rx='180' ry='120' fill='none' stroke='%231b6ca8' stroke-width='1'/%3E%3Cellipse cx='200' cy='200' rx='140' ry='90' fill='none' stroke='%231b6ca8' stroke-width='0.8'/%3E%3Cellipse cx='200' cy='200' rx='100' ry='60' fill='none' stroke='%231b6ca8' stroke-width='0.6'/%3E%3Cellipse cx='200' cy='200' rx='60' ry='35' fill='none' stroke='%231b6ca8' stroke-width='0.5'/%3E%3C/svg%3E");background-size:400px}
-  .hero-content{max-width:920px;position:relative;z-index:2}
+  .hero-deco{position:absolute;border-radius:50%;pointer-events:none}.hero-deco.one{width:550px;height:550px;background:radial-gradient(circle,rgba(27,108,168,0.06) 0%,transparent 70%);top:-8%;right:-10%}.hero-deco.two{width:420px;height:420px;background:radial-gradient(circle,rgba(181,112,42,0.04) 0%,transparent 70%);bottom:-5%;left:-6%}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center;max-width:1100px;width:100%}
   .hero-tag{display:inline-flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .2s}
   .hero-tag .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.5rem);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .4s}
-  .hero h1 .accent{color:var(--accent)}
-  .hero-desc{font-size:1.15rem;color:var(--text-secondary);max-width:650px;line-height:1.8;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s ease forwards .6s}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .4s}.hero h1 .accent{color:var(--accent)}
+  .hero-desc{font-size:1.1rem;color:var(--text-secondary);max-width:580px;line-height:1.8;margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease forwards .6s}
   .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards .8s}
-  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:8px;font-family:'Nunito Sans',sans-serif;font-size:.95rem;font-weight:700;text-decoration:none;transition:all .3s ease;cursor:pointer;border:none}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(27,108,168,0.22)}
-  .btn-outline{background:transparent;color:var(--text-primary);border:1.5px solid var(--border)}
-  .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-  .hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border);opacity:0;animation:fadeUp .8s ease forwards 1s}
-  .stat-item .stat-number{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--accent);font-weight:700}
-  .stat-item .stat-label{font-size:.82rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem;font-weight:600}
-
-  /* ========== SECTIONS ========== */
-  section{padding:7rem 3rem}
-  .section-inner{max-width:1100px;margin:0 auto}
-  .section-label{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:.2em;margin-bottom:.8rem;font-weight:500}
-  .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--text-primary);margin-bottom:3rem;line-height:1.2}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.6rem;border-radius:8px;font-family:'Nunito Sans',sans-serif;font-size:.92rem;font-weight:700;text-decoration:none;transition:all .3s;cursor:pointer;border:none}
+  .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(27,108,168,0.22)}
+  .btn-outline{background:transparent;color:var(--text-primary);border:1.5px solid var(--border)}.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .hero-photo{width:260px;height:260px;border-radius:50%;object-fit:cover;border:4px solid var(--bg-white);box-shadow:var(--shadow-lg);opacity:0;animation:fadeUp .8s ease forwards .5s}
+  .hero-stats{display:flex;gap:3rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);opacity:0;animation:fadeUp .8s ease forwards 1s}
+  .stat-item .stat-number{font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent);font-weight:700}.stat-item .stat-label{font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  section{padding:6rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
+  .section-label{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--accent);text-transform:uppercase;letter-spacing:.2em;margin-bottom:.7rem;font-weight:500}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--text-primary);margin-bottom:2.5rem;line-height:1.2}
   .section-alt{background:rgba(255,255,255,0.55);backdrop-filter:blur(4px);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
-
-  /* ========== ABOUT ========== */
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-  .about-text p{color:var(--text-body);margin-bottom:1.2rem;font-size:1.05rem}
-  .about-highlights{display:flex;flex-direction:column;gap:1.1rem}
-  .highlight-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.4rem;transition:all .3s ease;box-shadow:var(--shadow-sm)}
-  .highlight-card:hover{border-color:var(--accent-border);transform:translateX(4px);box-shadow:var(--shadow-md)}
-  .highlight-card .hc-icon{font-size:1.4rem;margin-bottom:.4rem}
-  .highlight-card h4{font-size:.95rem;font-weight:700;color:var(--text-primary);margin-bottom:.25rem}
-  .highlight-card p{font-size:.85rem;color:var(--text-secondary);line-height:1.5}
-
-  /* ========== TIMELINE ========== */
-  .timeline{position:relative;padding-left:3rem}
-  .timeline::before{content:'';position:absolute;top:0;bottom:0;left:7px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--border))}
-  .timeline-item{position:relative;margin-bottom:2.8rem;padding-bottom:.8rem}
-  .timeline-item::before{content:'';position:absolute;left:-2.85rem;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg-base);border:2.5px solid var(--accent);z-index:2;transition:all .3s}
-  .timeline-item:hover::before{background:var(--accent);box-shadow:0 0 0 5px rgba(27,108,168,0.1)}
-  .timeline-date{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--warm);letter-spacing:.05em;margin-bottom:.35rem;font-weight:500}
-  .timeline-item h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--text-primary);margin-bottom:.15rem}
-  .timeline-inst{font-size:.88rem;color:var(--accent);margin-bottom:.45rem;font-weight:600}
-  .timeline-details{color:var(--text-body);font-size:.9rem;line-height:1.7}
-  .timeline-badge{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.73rem;font-weight:700;margin-top:.5rem;margin-right:.3rem}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+  .about-text p{color:var(--text-body);margin-bottom:1rem;font-size:1rem}
+  .about-highlights{display:flex;flex-direction:column;gap:1rem}
+  .highlight-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1.2rem;transition:all .3s;box-shadow:var(--shadow-sm)}.highlight-card:hover{border-color:var(--accent-border);transform:translateX(4px);box-shadow:var(--shadow-md)}
+  .highlight-card .hc-icon{font-size:1.3rem;margin-bottom:.3rem}.highlight-card h4{font-size:.9rem;font-weight:700;color:var(--text-primary);margin-bottom:.2rem}.highlight-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.5}
+  .timeline{position:relative;padding-left:3rem}.timeline::before{content:'';position:absolute;top:0;bottom:0;left:7px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--border))}
+  .timeline-item{position:relative;margin-bottom:2.5rem;padding-bottom:.5rem}
+  .timeline-item::before{content:'';position:absolute;left:-2.85rem;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg-base);border:2.5px solid var(--accent);z-index:2;transition:all .3s}.timeline-item:hover::before{background:var(--accent);box-shadow:0 0 0 5px rgba(27,108,168,0.1)}
+  .timeline-date{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--warm);letter-spacing:.05em;margin-bottom:.3rem;font-weight:500}
+  .timeline-item h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text-primary);margin-bottom:.1rem}
+  .timeline-inst{font-size:.85rem;color:var(--accent);margin-bottom:.4rem;font-weight:600}
+  .timeline-details{color:var(--text-body);font-size:.88rem;line-height:1.7}
+  .timeline-badge{display:inline-block;padding:.18rem .65rem;border-radius:20px;font-size:.72rem;font-weight:700;margin-top:.4rem;margin-right:.3rem}
   .badge-distinction{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
   .badge-honors{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
   .badge-flying{background:rgba(107,115,128,0.08);color:#4a5568;border:1px solid rgba(107,115,128,0.2)}
-  .timeline-activities{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
-  .timeline-act{display:inline-block;padding:.16rem .55rem;border-radius:4px;font-size:.73rem;font-weight:600;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
-  .timeline-dissertation{margin-top:.6rem;padding:.8rem 1rem;background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:8px;font-size:.85rem;color:var(--accent-dark);line-height:1.5}
-  .timeline-dissertation strong{font-weight:700}
-
-  /* ========== EXPERIENCE ========== */
-  .exp-grid{display:flex;flex-direction:column;gap:1.4rem}
-  .exp-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:1.8rem 2rem;transition:all .35s ease;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
-  .exp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
-  .exp-card:hover{border-color:var(--accent-border);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-  .exp-card:hover::before{opacity:1}
-  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;flex-wrap:wrap;gap:.5rem}
-  .exp-role{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text-primary)}
-  .exp-date{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--warm);white-space:nowrap;font-weight:500}
-  .exp-company{font-size:.9rem;color:var(--accent);font-weight:600;margin-bottom:.6rem}
-  .exp-desc{color:var(--text-body);font-size:.9rem;line-height:1.7}
-  .exp-type{display:inline-block;padding:.14rem .55rem;border-radius:4px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-left:.4rem;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border);vertical-align:middle;font-family:'Nunito Sans',sans-serif}
-
-  /* ========== RESEARCH ========== */
-  .research-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:16px;padding:2.2rem;position:relative;overflow:hidden;margin-bottom:1.8rem;box-shadow:var(--shadow-sm);transition:all .3s}
-  .research-card:hover{box-shadow:var(--shadow-md)}
-  .research-card::after{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(27,108,168,0.04) 0%,transparent 70%);pointer-events:none}
-  .research-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.25rem .7rem;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem;font-weight:500}
-  .tag-current{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
-  .tag-completed{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
-  .research-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--text-primary);margin-bottom:.6rem;line-height:1.4;position:relative;z-index:1}
-  .research-meta{font-size:.85rem;color:var(--text-muted);margin-bottom:.8rem}
-  .research-desc{color:var(--text-body);font-size:.92rem;line-height:1.7;position:relative;z-index:1}
-  .research-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;color:var(--accent);text-decoration:none;font-weight:700;font-size:.88rem;transition:gap .3s}
-  .research-link:hover{gap:.7rem}
-
-  /* ========== SKILLS ========== */
-  .skills-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.3rem}
-  .skill-category{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.6rem;transition:all .3s;box-shadow:var(--shadow-sm)}
-  .skill-category:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
-  .skill-cat-title{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem;font-weight:500}
-  .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
-  .skill-tag{padding:.3rem .8rem;border-radius:6px;font-size:.8rem;color:var(--text-body);background:var(--bg-base);border:1px solid var(--border-light);transition:all .25s}
-  .skill-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
-
-  /* ========== AWARDS ========== */
-  .awards-list{display:flex;flex-direction:column;gap:1.1rem}
-  .award-item{display:flex;gap:1.1rem;align-items:flex-start;padding:1.3rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;transition:all .3s;box-shadow:var(--shadow-sm)}
-  .award-item:hover{border-color:var(--warm-border);transform:translateX(4px);box-shadow:var(--shadow-md)}
-  .award-icon{font-size:1.6rem;line-height:1;flex-shrink:0}
-  .award-item h4{font-size:.95rem;color:var(--text-primary);font-weight:700;margin-bottom:.15rem}
-  .award-item p{font-size:.85rem;color:var(--text-muted)}
-
-  /* ========== LEADERSHIP ========== */
-  .leadership-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
-  .leadership-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.4rem;transition:all .3s;box-shadow:var(--shadow-sm)}
-  .leadership-card:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
-  .leadership-card .lc-icon{font-size:1.3rem;margin-bottom:.4rem}
-  .leadership-card h4{font-size:.92rem;font-weight:700;color:var(--text-primary);margin-bottom:.2rem}
-  .leadership-card .lc-org{font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:.3rem}
-  .leadership-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.5}
-
-  /* ========== MEMBERSHIPS ========== */
-  .membership-tags{display:flex;flex-wrap:wrap;gap:.6rem}
-  .membership-tag{padding:.45rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--text-body);background:var(--bg-white);border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:all .25s}
-  .membership-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
-
-  /* ========== CONTACT ========== */
-  .contact-section{text-align:center}
-  .contact-section .section-title{margin-bottom:1rem}
-  .contact-subtitle{color:var(--text-secondary);font-size:1.05rem;margin-bottom:2.5rem;max-width:520px;margin-left:auto;margin-right:auto}
-  .contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
-  .contact-card{display:flex;align-items:center;gap:.7rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1rem 1.4rem;text-decoration:none;color:var(--text-primary);transition:all .3s;box-shadow:var(--shadow-sm)}
-  .contact-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-  .contact-card .cc-icon{font-size:1.1rem}
-  .contact-card .cc-label{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-  .contact-card .cc-value{font-size:.85rem;font-weight:600}
-
-  footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--text-muted);background:rgba(255,255,255,0.4)}
-  footer .footer-name{color:var(--accent);font-weight:700}
-
+  .timeline-activities{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+  .timeline-act{display:inline-block;padding:.14rem .5rem;border-radius:4px;font-size:.72rem;font-weight:600;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
+  .timeline-dissertation{margin-top:.5rem;padding:.7rem .9rem;background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:8px;font-size:.83rem;color:var(--accent-dark);line-height:1.5}.timeline-dissertation strong{font-weight:700}
+  .exp-grid{display:flex;flex-direction:column;gap:1.2rem}
+  .exp-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.6rem 1.8rem;transition:all .3s;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .exp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}.exp-card:hover{border-color:var(--accent-border);transform:translateY(-2px);box-shadow:var(--shadow-lg)}.exp-card:hover::before{opacity:1}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;flex-wrap:wrap;gap:.4rem}
+  .exp-role{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text-primary)}
+  .exp-date{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--warm);white-space:nowrap;font-weight:500}
+  .exp-company{font-size:.88rem;color:var(--accent);font-weight:600;margin-bottom:.5rem}
+  .exp-desc{color:var(--text-body);font-size:.88rem;line-height:1.7}
+  .exp-type{display:inline-block;padding:.12rem .5rem;border-radius:4px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-left:.4rem;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border);vertical-align:middle}
+  .view-more{color:var(--accent);font-size:.83rem;font-weight:600;cursor:pointer;border:none;background:none;padding:.3rem 0;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s}.view-more:hover{gap:.5rem}
+  .view-more svg{transition:transform .3s}.view-more.open svg{transform:rotate(180deg)}
+  .expandable{max-height:0;overflow:hidden;transition:max-height .4s ease}.expandable.open{max-height:600px}
+  .research-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:2rem;position:relative;overflow:hidden;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);transition:all .3s}.research-card:hover{box-shadow:var(--shadow-md)}
+  .research-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.22rem .65rem;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.7rem;font-weight:500}
+  .tag-current{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}.tag-completed{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
+  .research-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text-primary);margin-bottom:.5rem;line-height:1.4}
+  .research-meta{font-size:.83rem;color:var(--text-muted);margin-bottom:.6rem}
+  .research-desc{color:var(--text-body);font-size:.9rem;line-height:1.7}
+  .research-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.8rem;color:var(--accent);text-decoration:none;font-weight:700;font-size:.85rem;transition:gap .3s}.research-link:hover{gap:.7rem}
+  .skills-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+  .skill-category{background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1.4rem;transition:all .3s;box-shadow:var(--shadow-sm)}.skill-category:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
+  .skill-cat-title{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.7rem;font-weight:500}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}.skill-tag{padding:.28rem .75rem;border-radius:6px;font-size:.8rem;color:var(--text-body);background:var(--bg-base);border:1px solid var(--border-light);transition:all .25s}.skill-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
+  .awards-list{display:flex;flex-direction:column;gap:1rem}
+  .award-item{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;transition:all .3s;box-shadow:var(--shadow-sm)}.award-item:hover{border-color:var(--warm-border);transform:translateX(4px);box-shadow:var(--shadow-md)}
+  .award-icon{font-size:1.5rem;line-height:1;flex-shrink:0}.award-item h4{font-size:.9rem;color:var(--text-primary);font-weight:700;margin-bottom:.1rem}.award-item p{font-size:.82rem;color:var(--text-muted)}
+  .leadership-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem}
+  .leadership-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1.2rem;transition:all .3s;box-shadow:var(--shadow-sm)}.leadership-card:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
+  .leadership-card .lc-icon{font-size:1.2rem;margin-bottom:.3rem}.leadership-card h4{font-size:.88rem;font-weight:700;color:var(--text-primary);margin-bottom:.15rem}.leadership-card .lc-org{font-size:.78rem;color:var(--accent);font-weight:600;margin-bottom:.2rem}.leadership-card p{font-size:.8rem;color:var(--text-secondary);line-height:1.5}
+  .membership-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .membership-tag{padding:.4rem .9rem;border-radius:8px;font-size:.82rem;font-weight:600;color:var(--text-body);background:var(--bg-white);border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:all .25s}.membership-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
+  .contact-section{text-align:center}.contact-section .section-title{margin-bottom:.8rem}
+  .contact-subtitle{color:var(--text-secondary);font-size:1rem;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+  .contact-links{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+  .contact-card{display:flex;align-items:center;gap:.6rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:.8rem 1.2rem;text-decoration:none;color:var(--text-primary);transition:all .3s;box-shadow:var(--shadow-sm)}.contact-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .contact-card .cc-icon{font-size:1rem}.contact-card .cc-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}.contact-card .cc-value{font-size:.82rem;font-weight:600}
+  footer{text-align:center;padding:1.5rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--text-muted);background:rgba(255,255,255,0.4)}footer .footer-name{color:var(--accent);font-weight:700}
   @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.visible{opacity:1;transform:translateY(0)}
-
-  @media(max-width:1050px){
-    .nav-right{gap:1.1rem}
-    .nav-right a{font-size:.72rem}
-  }
-  @media(max-width:900px){
-    nav{padding:1rem 1.5rem}
-    .nav-right{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(240,246,251,0.98);flex-direction:column;justify-content:center;align-items:center;gap:2rem;backdrop-filter:blur(20px)}
-    .nav-right.open{display:flex}
-    .nav-right a{font-size:1rem}
-    .hamburger{display:flex}
-    section{padding:4rem 1.5rem}
-    .hero{padding:5rem 1.5rem 3rem}
-    .about-grid{grid-template-columns:1fr;gap:2rem}
-    .hero-stats{gap:1.5rem;flex-wrap:wrap}
-    .exp-header{flex-direction:column}
-    .contact-links{flex-direction:column;align-items:center}
-    .leadership-grid{grid-template-columns:1fr}
-  }
-  @media(max-width:600px){
-    .hero h1{font-size:2.4rem}
-    .hero-stats{gap:1.2rem}
-    .stat-item .stat-number{font-size:1.6rem}
-    .skills-categories{grid-template-columns:1fr}
-  }
+  .reveal{opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+  @media(max-width:1050px){.nav-right{gap:1rem}.nav-right a{font-size:.7rem}}
+  @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-right{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(240,246,251,0.98);flex-direction:column;justify-content:center;align-items:center;gap:2rem;backdrop-filter:blur(20px)}.nav-right.open{display:flex}.nav-right a{font-size:1rem}.hamburger{display:flex}section{padding:3.5rem 1.5rem}.hero{padding:5rem 1.5rem 3rem}.hero-grid{grid-template-columns:1fr;text-align:center}.hero-photo{width:200px;height:200px;margin:0 auto 2rem}.about-grid{grid-template-columns:1fr;gap:2rem}.hero-stats{gap:1.5rem;flex-wrap:wrap;justify-content:center}.exp-header{flex-direction:column}.contact-links{flex-direction:column;align-items:center}.leadership-grid{grid-template-columns:1fr}}
+  @media(max-width:600px){.hero h1{font-size:2.2rem}.hero-stats{gap:1rem}.stat-item .stat-number{font-size:1.5rem}.skills-categories{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- Animated background -->
 <div class="page-bg"></div>
-
-<!-- Navigation -->
 <nav id="navbar">
   <a href="#hero" class="nav-logo">Stephen <span>Nyaranga</span></a>
   <div class="nav-right" id="navLinks">
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#research">Research</a>
-    <a href="#skills">Skills</a>
-    <a href="#leadership">Leadership</a>
-    <a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#research">Research</a><a href="#skills">Skills</a><a href="#leadership">Leadership</a><a href="#contact">Contact</a>
     <a href="Stephen_Nyaranga_CV.pdf" download class="nav-cta">Download CV</a>
   </div>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- Hero -->
 <section class="hero" id="hero">
-  <div class="hero-deco one"></div>
-  <div class="hero-deco two"></div>
-  <div class="hero-topo"></div>
-  <div class="hero-content">
-    <div class="hero-tag"><span class="dot"></span> PhD Researcher — Climate Science</div>
-    <h1>Stephen<br><span class="accent">Nyaranga</span></h1>
-    <p class="hero-desc">Climate scientist and geophysicist harnessing deep learning and multi-sensor Earth observation to map flood risks in Rwanda's mountainous cities. Bridging physics, data science, and real-world impact across four countries.</p>
-    <div class="hero-actions">
-      <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download CV
-      </a>
-      <a href="#research" class="btn btn-outline">View Research</a>
+  <div class="hero-deco one"></div><div class="hero-deco two"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag"><span class="dot"></span> PhD Researcher — Climate Science</div>
+      <h1>Stephen<br><span class="accent">Nyaranga</span></h1>
+      <p class="hero-desc">Climate scientist and geophysicist harnessing deep learning and multi-sensor Earth observation to map flood risks in Rwanda's mountainous cities. Bridging physics, data science, and real-world impact.</p>
+      <div class="hero-actions">
+        <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV</a>
+        <a href="#research" class="btn btn-outline">View Research</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Degrees</div></div>
+        <div class="stat-item"><div class="stat-number">4+</div><div class="stat-label">Years Exp.</div></div>
+        <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">Countries</div></div>
+        <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Languages</div></div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Degrees Earned</div></div>
-      <div class="stat-item"><div class="stat-number">4+</div><div class="stat-label">Years Experience</div></div>
-      <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">Countries</div></div>
-      <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Languages</div></div>
-    </div>
+    <img src="data:image/jpeg;base64,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" alt="Stephen Nyaranga" class="hero-photo">
   </div>
 </section>
 
-<!-- About -->
 <section id="about">
   <div class="section-inner">
     <div class="section-label reveal">// About Me</div>
     <div class="section-title reveal">A diligent scientist driven by<br>curiosity and real-world impact</div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I am a Kenyan-born climate scientist and geophysicist currently pursuing my PhD at AIMS Research and Innovation Center in collaboration with Imperial College London, where I develop multi-sensor deep learning frameworks for flood depth estimation in Rwanda's mountainous cities.</p>
-        <p>My academic journey spans four countries — Kenya, Senegal, Rwanda, and the UK — earning me a BSc with First Class Honours in Education Science (Physics/Mathematics), an MSc in Mathematical Sciences with Distinction from AIMS-Senegal, and an MSc in Geophysics from ICTP-EAIFR.</p>
-        <p>Beyond research, I bring hands-on professional experience in IT leadership, teaching, digital transformation, student governance, peer counselling, and community service — from training children in computer programming at Don Bosco Karen to chairing university electoral commissions.</p>
+        <p>I am a Kenyan-born climate scientist and geophysicist currently pursuing my PhD at AIMS Research and Innovation Center in collaboration with Imperial College London, developing multi-sensor deep learning frameworks for flood depth estimation in Rwanda's mountainous cities.</p>
+        <p>My academic journey spans four countries — Kenya, Senegal, Rwanda, and the UK — earning a BSc with First Class Honours, an MSc with Distinction from AIMS-Senegal, and pursuing an MSc in Geophysics at ICTP-EAIFR.</p>
+        <p>I also serve as IT Manager at <a href="https://acmhr-k.org" target="_blank" style="color:var(--accent)">ACMHR-K</a> (Alliance for Cardio-Metabolic Health & Research – Kenya), am a member of the <a href="https://axiomresearchs.org" target="_blank" style="color:var(--accent)">AXIOM Research Group</a> at AIMS-RIC, and have built the websites for both organizations.</p>
       </div>
       <div class="about-highlights reveal">
-        <div class="highlight-card"><div class="hc-icon">🌍</div><h4>Climate & Flood Risk</h4><p>Using SAR time-series, optical EO, and terrain data to model floods in Musanze & Rubavu, Rwanda.</p></div>
+        <div class="highlight-card"><div class="hc-icon">🌍</div><h4>Climate & Flood Risk</h4><p>SAR time-series, optical EO, and terrain data to model floods in Musanze & Rubavu, Rwanda.</p></div>
         <div class="highlight-card"><div class="hc-icon">🤖</div><h4>AI & Data Science</h4><p>Deep learning, machine learning, and geospatial analytics for environmental applications.</p></div>
-        <div class="highlight-card"><div class="hc-icon">🎓</div><h4>Education & Outreach</h4><p>Passionate teacher, ICDL trainer, and programming instructor with experience across all levels.</p></div>
+        <div class="highlight-card"><div class="hc-icon">🎓</div><h4>Educator & Trainer</h4><p>ICDL trainer, programming instructor, and lecturer across all levels of education.</p></div>
+        <div class="highlight-card"><div class="hc-icon">💻</div><h4>IT Leader & Web Developer</h4><p>Head of IT at Vatel Rwanda, IT Manager at ACMHR-K, built organizational websites.</p></div>
         <div class="highlight-card"><div class="hc-icon">🏆</div><h4>Award-Winning Communicator</h4><p>Best winner of ICTP-EAIFR 3-Minute Thesis Competition, 2024.</p></div>
-        <div class="highlight-card"><div class="hc-icon">🤝</div><h4>Leader & Public Servant</h4><p>Student representative, electoral commission chair, peer counsellor, and IEBC election official.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Education -->
 <section id="education" class="section-alt">
   <div class="section-inner">
     <div class="section-label reveal">// Education</div>
     <div class="section-title reveal">Academic Journey</div>
     <div class="timeline">
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Oct 2025 — Present</div>
-        <h3>PhD in Climate Science</h3>
-        <div class="timeline-inst">AIMS Research & Innovation Center / Imperial College London</div>
-        <p class="timeline-details">Research on Multi-Sensor Deep Learning Framework for Flood Depth Estimation in Mountainous Cities, integrating SAR Time-Series, Optical EO, and Terrain Metrics in Musanze & Rubavu, Rwanda.</p>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Jan 2023 — Dec 2024</div>
-        <h3>Pursued an MSc Geophysics</h3>
-        <div class="timeline-inst">ICTP-East Africa Institute for Fundamental Research (ICTP-EAIFR), University of Rwanda, Kigali</div>
-        <p class="timeline-details">Coursework in seismology, geodesy, InSAR, computational geodynamics, earthquake mechanics, atmospheric physics, GPS geodesy, physics of volcanoes, and theoretical & observational seismology.</p>
-        <div class="timeline-dissertation"><strong>Thesis:</strong> Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020–2024 Sentinel-1 InSAR Survey.</div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Oct 2021 — Jul 2022</div>
-        <h3>MSc Mathematical Sciences — Climate Science / Data Science</h3>
-        <div class="timeline-inst">African Institute for Mathematical Sciences (AIMS-Senegal), Mbour</div>
-        <p class="timeline-details">Coursework in machine learning, AI, climate dynamics, data science, programming for data science, knowledge representation and reasoning, quantum mechanics and quantum computing, statistical learning, and classical mechanics. Mastercard Foundation Scholar.</p>
-        <div class="timeline-dissertation"><strong>Dissertation:</strong> Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998.</div>
-        <span class="timeline-badge badge-distinction">Graduated with Distinction</span>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Aug 2016 — Mar 2021</div>
-        <h3>BSc Education Science (Physics / Mathematics)</h3>
-        <div class="timeline-inst">Karatina University, Nyeri, Kenya</div>
-        <p class="timeline-details">Solid grounding in physics and mathematics with teacher training. Active in student governance, peer counselling, and Christian Union leadership. Registered with Teachers Service Commission (TSC), Kenya.</p>
-        <span class="timeline-badge badge-honors">First Class Honours</span>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">2012 — 2015</div>
-        <h3>Secondary Education</h3>
-        <div class="timeline-inst">Kobos Boys High School, Trans-Nzoia County, Kenya</div>
-        <p class="timeline-details">Served as Student Representative and Librarian. Actively participated in co-curricular activities including Science Congress competitions and Music Festivals.</p>
-        <div class="timeline-activities">
-          <span class="timeline-act">Student Representative</span>
-          <span class="timeline-act">Librarian</span>
-          <span class="timeline-act">Science Congress</span>
-          <span class="timeline-act">Music Festivals</span>
-        </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Primary Education</div>
-        <h3>Lelkina Primary School</h3>
-        <div class="timeline-inst">Kapomboi Ward, Kenya</div>
-        <p class="timeline-details">Built a strong academic foundation from an early age, graduating with outstanding results.</p>
-        <span class="timeline-badge badge-flying">Passed with Flying Colours</span>
-      </div>
-
+      <div class="timeline-item reveal"><div class="timeline-date">Oct 2025 — Present</div><h3>PhD in Climate Science</h3><div class="timeline-inst">AIMS Research & Innovation Center / Imperial College London</div><p class="timeline-details">Multi-Sensor Deep Learning Framework for Flood Depth Estimation in Mountainous Cities, integrating SAR Time-Series, Optical EO, and Terrain Metrics in Musanze & Rubavu, Rwanda.</p></div>
+      <div class="timeline-item reveal"><div class="timeline-date">Jan 2023 — Dec 2024</div><h3>Pursued MSc in Geophysics</h3><div class="timeline-inst">ICTP-East Africa Institute for Fundamental Research (ICTP-EAIFR), University of Rwanda, Kigali</div><p class="timeline-details">Coursework in seismology, geodesy, InSAR, computational geodynamics, earthquake mechanics, atmospheric physics, GPS geodesy, physics of volcanoes, and theoretical & observational seismology.</p><div class="timeline-dissertation"><strong>Thesis:</strong> Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020–2024 Sentinel-1 InSAR Survey.</div></div>
+      <div class="timeline-item reveal"><div class="timeline-date">Oct 2021 — Jul 2022</div><h3>MSc Mathematical Sciences — Climate Science / Data Science</h3><div class="timeline-inst">African Institute for Mathematical Sciences (AIMS-Senegal), Mbour</div><p class="timeline-details">Machine learning, AI, climate dynamics, data science, quantum mechanics & quantum computing, statistical learning. Mastercard Foundation Scholar.</p><div class="timeline-dissertation"><strong>Dissertation:</strong> Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998.</div><span class="timeline-badge badge-distinction">Graduated with Distinction</span></div>
+      <div class="timeline-item reveal"><div class="timeline-date">Aug 2016 — Mar 2021</div><h3>BSc Education Science (Physics / Mathematics)</h3><div class="timeline-inst">Karatina University, Nyeri, Kenya</div><p class="timeline-details">Active in student governance, peer counselling, and Christian Union leadership. TSC registered.</p><span class="timeline-badge badge-honors">First Class Honours</span></div>
+      <div class="timeline-item reveal"><div class="timeline-date">2012 — 2015</div><h3>Secondary Education</h3><div class="timeline-inst">Kobos Boys High School, Trans-Nzoia County, Kenya</div><p class="timeline-details">Student Representative, Librarian, Science Congress, and Music Festivals.</p><div class="timeline-activities"><span class="timeline-act">Student Rep</span><span class="timeline-act">Librarian</span><span class="timeline-act">Science Congress</span><span class="timeline-act">Music Festivals</span></div></div>
+      <div class="timeline-item reveal"><div class="timeline-date">Primary Education</div><h3>Lelkina Primary School</h3><div class="timeline-inst">Kapomboi Ward, Kenya</div><span class="timeline-badge badge-flying">Passed with Flying Colours</span></div>
     </div>
   </div>
 </section>
 
-<!-- Experience -->
 <section id="experience">
   <div class="section-inner">
     <div class="section-label reveal">// Professional Experience</div>
     <div class="section-title reveal">Where I've Contributed</div>
     <div class="exp-grid">
-
       <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Head of IT Department <span class="exp-type">Full-Time</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div>
-          <div class="exp-date">Jul 2024 — Oct 2025</div>
-        </div>
-        <p class="exp-desc">Developed scheduling and calendar systems used across all departments (HR, Operations, Academics, Communications, Admissions, and Finance). Ensured Canvas, Moodle, and Triade LMS customization and enhanced the online learning experience. Built an in-house platform for tracking internships, lecturers, hours, and attendance. Provided comprehensive IT support, troubleshooting, and repair for all electronic equipment. Developed software solutions for institutional challenges. Managed hardware and software inventory, monitored internet usage, maintained information security, and ensured adherence to IT policies. Delivered IT training, orientation, and weekly tips to lecturers, staff, and students. Monitored ICDL course completion and tools such as Grammarly, OneDrive, and SharePoint across the institution.</p>
+        <div class="exp-header"><div><div class="exp-role">IT Manager <span class="exp-type">Board</span></div><div class="exp-company">ACMHR-K — Alliance for Cardio-Metabolic Health & Research, Kenya</div></div><div class="exp-date">Current</div></div>
+        <p class="exp-desc">Board-level IT Manager for ACMHR-K. Built and maintain the organization's website (<a href="https://acmhr-k.org" target="_blank" style="color:var(--accent)">acmhr-k.org</a>). PhD Fellow, CLARITY-Africa / Imperial College London.</p>
       </div>
-
       <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Assistant Lecturer <span class="exp-type">Part-Time</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div>
-          <div class="exp-date">Jun 2025 — Oct 2025</div>
-        </div>
-        <p class="exp-desc">Appointed to the academic rank of Assistant Lecturer for the 2025–2026 academic year in recognition of performance in teaching and contributions to Vatel Rwanda's academic mission. Delivered the ICDL (International Computer Driving License) course to lecturers, staff, and students. Led the IT Department as Head of Department. Contributed to academic quality assurance and digital transformation of teaching. Facilitated AI integration in curriculum and staff development.</p>
+        <div class="exp-header"><div><div class="exp-role">Assistant Lecturer <span class="exp-type">Part-Time</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div><div class="exp-date">Jun 2025 — Oct 2025</div></div>
+        <p class="exp-desc">Appointed to the academic rank of Assistant Lecturer for 2025–2026. Delivered ICDL courses to lecturers, staff, and students. Led IT Department. Contributed to academic quality assurance and digital transformation. Facilitated AI integration in curriculum and staff development.</p>
       </div>
-
       <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">IT Associate — MCF Enrichment Program <span class="exp-type">Internship</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div>
-          <div class="exp-date">Jul 2023 — Jul 2024</div>
-        </div>
-        <p class="exp-desc">Introduced and implemented AI tools into teaching methodologies, enabling innovative learning experiences for students and empowering faculty to adopt modern technologies. Successfully transitioned to Canvas Instructure, migrating courses and ensuring functionality with minimal disruption. Designed and conducted training programs for students, staff, and faculty on AI applications, ICDL modules, and digital literacy. Proactively managed IT systems, ensuring uninterrupted Wi-Fi access, maintaining critical devices, and resolving technical challenges. Supervised technical support for exams and optimized digital learning platforms.</p>
+        <div class="exp-header"><div><div class="exp-role">Head of IT Department <span class="exp-type">Full-Time</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div><div class="exp-date">Jul 2024 — Oct 2025</div></div>
+        <p class="exp-desc">Managed Canvas, Moodle, and Triade LMS customization. Built in-house tracking platforms. Delivered IT training to lecturers, staff, and students.</p>
+        <button class="view-more" onclick="toggleExpand(this)">View more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="expandable"><p class="exp-desc" style="margin-top:.5rem">Developed scheduling systems across all departments. Provided comprehensive IT support, troubleshooting, and repair for all equipment. Developed software solutions for institutional challenges. Managed hardware/software inventory, monitored internet usage, maintained information security, and ensured adherence to IT policies. Monitored ICDL completion and tools (Grammarly, OneDrive, SharePoint).</p></div>
       </div>
-
       <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Physics & Mathematics Teacher</div><div class="exp-company">Kathiani Boy's High School — Machakos, Kenya</div></div>
-          <div class="exp-date">May — Oct 2021</div>
-        </div>
-        <p class="exp-desc">Taught Physics and Mathematics at the secondary school level. Prepared lessons and teaching materials, assessed student progress, and refined skills as a communicator and motivator.</p>
+        <div class="exp-header"><div><div class="exp-role">IT Associate — MCF Enrichment Program <span class="exp-type">Internship</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div><div class="exp-date">Jul 2023 — Jul 2024</div></div>
+        <p class="exp-desc">Introduced AI tools into teaching. Transitioned to Canvas Instructure. Designed training programs on AI, ICDL, and digital literacy for students, staff, and faculty.</p>
+        <button class="view-more" onclick="toggleExpand(this)">View more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="expandable"><p class="exp-desc" style="margin-top:.5rem">Proactively managed IT systems ensuring uninterrupted Wi-Fi, maintaining critical devices, and resolving technical challenges. Supervised technical support for exams and optimized digital learning platforms.</p></div>
       </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Physics & Mathematics Teacher</div><div class="exp-company">Ntanki Secondary School — Meru, Kenya</div></div>
-          <div class="exp-date">Jan — Apr 2021</div>
-        </div>
-        <p class="exp-desc">Prepared lessons and teaching materials for Mathematics and Physics. Developed lesson plans and assessed student progress.</p>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Teaching Practice & Undergraduate Teaching</div><div class="exp-company">Multiple Schools — Trans-Nzoia & Kiambu Counties, Kenya</div></div>
-          <div class="exp-date">2016 — 2019</div>
-        </div>
-        <p class="exp-desc">Taught Physics and Mathematics at Kobos Secondary School (2016), Lessos Secondary School (2017), Handege Secondary School (2018), and completed teaching practice at Mururia Boys High School (2019).</p>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Computer Programming Trainer <span class="exp-type">Volunteer</span></div><div class="exp-company">Totosci Academy, Don Bosco — Karen, Nairobi</div></div>
-          <div class="exp-date">Feb — Mar 2019</div>
-        </div>
-        <p class="exp-desc">Trained needy children in computer programming at the Don Bosco centre in Karen, Nairobi, fostering early interest in technology and digital literacy.</p>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div><div class="exp-role">Clerk Officer — General Election <span class="exp-type">IEBC</span></div><div class="exp-company">Independent Electoral & Boundaries Commission — Trans-Nzoia, Kenya</div></div>
-          <div class="exp-date">Aug 2017</div>
-        </div>
-        <p class="exp-desc">Completed IEBC training at Kitale National Showground and served as a clerk officer at Gidea Primary School polling station during Kenya's 2017 general election.</p>
-      </div>
-
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">Physics & Mathematics Teacher</div><div class="exp-company">Kathiani Boy's High School — Machakos, Kenya</div></div><div class="exp-date">May — Oct 2021</div></div><p class="exp-desc">Taught Physics and Mathematics. Prepared lessons, assessed student progress, refined communication skills.</p></div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">Physics & Mathematics Teacher</div><div class="exp-company">Ntanki Secondary School — Meru, Kenya</div></div><div class="exp-date">Jan — Apr 2021</div></div><p class="exp-desc">Prepared lessons and teaching materials for Mathematics and Physics.</p></div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">Teaching Practice & Undergraduate Teaching</div><div class="exp-company">Multiple Schools — Trans-Nzoia & Kiambu Counties, Kenya</div></div><div class="exp-date">2016 — 2019</div></div><p class="exp-desc">Taught Physics and Mathematics at Kobos SS (2016), Lessos SS (2017), Handege SS (2018), and teaching practice at Mururia Boys HS (2019).</p></div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">Computer Programming Trainer <span class="exp-type">Volunteer</span></div><div class="exp-company">Totosci Academy, Don Bosco — Karen, Nairobi</div></div><div class="exp-date">Feb — Mar 2019</div></div><p class="exp-desc">Trained needy children in computer programming, fostering early interest in technology and digital literacy.</p></div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">Clerk Officer — General Election <span class="exp-type">IEBC</span></div><div class="exp-company">IEBC — Trans-Nzoia, Kenya</div></div><div class="exp-date">Aug 2017</div></div><p class="exp-desc">Trained by IEBC at Kitale National Showground. Served as clerk officer at Gidea Primary School polling station during Kenya's 2017 general election.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Research -->
 <section id="research" class="section-alt">
   <div class="section-inner">
     <div class="section-label reveal">// Research</div>
     <div class="section-title reveal">Current & Past Work</div>
-
-    <div class="research-card reveal">
-      <span class="research-tag tag-current">Current · PhD Research</span>
-      <h3>Multi-Sensor Deep Learning Framework for Flood Depth Estimation in Mountainous Cities</h3>
-      <div class="research-meta">AIMS-RIC / Imperial College London · Oct 2025 – Present</div>
-      <p class="research-desc">Integrating SAR time-series, optical Earth observation, and terrain metrics to estimate flood depth in Musanze and Rubavu, Rwanda. The framework aims to improve early-warning systems and disaster resilience in vulnerable mountainous urban environments.</p>
-    </div>
-
-    <div class="research-card reveal">
-      <span class="research-tag tag-completed">Completed · MSc Thesis (Geophysics)</span>
-      <h3>Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020–2024 Sentinel-1 InSAR Survey</h3>
-      <div class="research-meta">ICTP-EAIFR, University of Rwanda · 2023 – 2024</div>
-      <p class="research-desc">Conducted time-series Interferometric Synthetic Aperture Radar (InSAR) analysis using Sentinel-1 data to monitor ground deformation at Kenya's Olkaria geothermal field over a four-year period, providing insights into subsurface geothermal dynamics and surface displacement patterns.</p>
-    </div>
-
-    <div class="research-card reveal">
-      <span class="research-tag tag-completed">Completed · MSc Dissertation</span>
-      <h3>Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998</h3>
-      <div class="research-meta">AIMS-Senegal · 2021 – 2022</div>
-      <p class="research-desc">Investigated the role of atmospheric rivers in driving surface melting events over the Pine Island Glacier in West Antarctica, analysing climate dynamics across two significant melt years. Completed as a Mastercard Foundation Scholar, graduated with Distinction.</p>
-      <a href="https://drive.google.com/drive/folders/1EChAvIUcMb2n6QWsJx3RQjyseSVFw1y9" target="_blank" rel="noopener" class="research-link">
-        View Thesis Project
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </a>
-    </div>
+    <div class="research-card reveal"><span class="research-tag tag-current">Current · PhD</span><h3>Multi-Sensor Deep Learning Framework for Flood Depth Estimation in Mountainous Cities</h3><div class="research-meta">AIMS-RIC / Imperial College London · Oct 2025 – Present</div><p class="research-desc">Integrating SAR time-series, optical EO, and terrain metrics to estimate flood depth in Musanze and Rubavu, Rwanda, improving early-warning systems and disaster resilience.</p></div>
+    <div class="research-card reveal"><span class="research-tag tag-completed">Completed · MSc Geophysics</span><h3>Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya</h3><div class="research-meta">ICTP-EAIFR, University of Rwanda · 2023 – 2024</div><p class="research-desc">Conducted time-series InSAR analysis using Sentinel-1 data to monitor ground deformation at Kenya's Olkaria geothermal field over 2020–2024, providing insights into subsurface geothermal dynamics.</p></div>
+    <div class="research-card reveal"><span class="research-tag tag-completed">Completed · MSc AIMS-Senegal</span><h3>Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998</h3><div class="research-meta">AIMS-Senegal · 2021 – 2022</div><p class="research-desc">Investigated atmospheric rivers driving surface melting over the Pine Island Glacier in West Antarctica. Mastercard Foundation Scholar, graduated with Distinction.</p><a href="https://drive.google.com/drive/folders/1EChAvIUcMb2n6QWsJx3RQjyseSVFw1y9" target="_blank" rel="noopener" class="research-link">View Thesis Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a></div>
   </div>
 </section>
 
-<!-- Skills -->
 <section id="skills">
   <div class="section-inner">
     <div class="section-label reveal">// Skills & Tools</div>
     <div class="section-title reveal">Technical Arsenal</div>
     <div class="skills-categories">
-      <div class="skill-category reveal"><div class="skill-cat-title">Programming</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">C / C++</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Fortran</span></div></div>
-      <div class="skill-category reveal"><div class="skill-cat-title">Data Science & ML</div><div class="skill-tags"><span class="skill-tag">Deep Learning</span><span class="skill-tag">Machine Learning</span><span class="skill-tag">Data Science</span><span class="skill-tag">Statistical Learning</span><span class="skill-tag">AI</span></div></div>
-      <div class="skill-category reveal"><div class="skill-cat-title">Earth Observation</div><div class="skill-tags"><span class="skill-tag">SAR Imagery</span><span class="skill-tag">Optical EO</span><span class="skill-tag">GPS Geodesy</span><span class="skill-tag">InSAR</span><span class="skill-tag">Climate Dynamics</span></div></div>
-      <div class="skill-category reveal"><div class="skill-cat-title">Tools & Platforms</div><div class="skill-tags"><span class="skill-tag">Linux</span><span class="skill-tag">LaTeX</span><span class="skill-tag">Microsoft Office</span><span class="skill-tag">Git</span><span class="skill-tag">Canvas LMS</span><span class="skill-tag">Moodle</span><span class="skill-tag">SharePoint</span><span class="skill-tag">OneDrive</span></div></div>
-      <div class="skill-category reveal"><div class="skill-cat-title">Languages</div><div class="skill-tags"><span class="skill-tag">English (Fluent)</span><span class="skill-tag">Swahili (Fluent)</span><span class="skill-tag">Luhya (Fluent)</span></div></div>
-      <div class="skill-category reveal"><div class="skill-cat-title">Soft Skills</div><div class="skill-tags"><span class="skill-tag">Teaching</span><span class="skill-tag">Communication</span><span class="skill-tag">Problem Solving</span><span class="skill-tag">Leadership</span><span class="skill-tag">Peer Counselling</span></div></div>
-      <div class="skill-category reveal"><div class="skill-cat-title">IT Management & EdTech</div><div class="skill-tags"><span class="skill-tag">Digital Transformation</span><span class="skill-tag">LMS Administration</span><span class="skill-tag">IT Support & Troubleshooting</span><span class="skill-tag">Program Management</span><span class="skill-tag">ICDL Training</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Programming</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">C/C++</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Fortran</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Data Science & ML</div><div class="skill-tags"><span class="skill-tag">Deep Learning</span><span class="skill-tag">Machine Learning</span><span class="skill-tag">AI</span><span class="skill-tag">Statistical Learning</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Earth Observation</div><div class="skill-tags"><span class="skill-tag">SAR / InSAR</span><span class="skill-tag">Optical EO</span><span class="skill-tag">GPS Geodesy</span><span class="skill-tag">Climate Dynamics</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">IT & EdTech</div><div class="skill-tags"><span class="skill-tag">Canvas LMS</span><span class="skill-tag">Moodle</span><span class="skill-tag">Web Development</span><span class="skill-tag">Digital Transformation</span><span class="skill-tag">ICDL Training</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Tools</div><div class="skill-tags"><span class="skill-tag">Linux</span><span class="skill-tag">LaTeX</span><span class="skill-tag">MS Office</span><span class="skill-tag">Git</span><span class="skill-tag">SharePoint</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Languages</div><div class="skill-tags"><span class="skill-tag">English</span><span class="skill-tag">Swahili</span><span class="skill-tag">Luhya</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- Leadership & Service -->
 <section id="leadership" class="section-alt">
   <div class="section-inner">
-    <div class="section-label reveal">// Leadership & Community Service</div>
+    <div class="section-label reveal">// Leadership & Service</div>
     <div class="section-title reveal">Beyond the Classroom</div>
     <div class="leadership-grid">
-      <div class="leadership-card reveal"><div class="lc-icon">🗳️</div><h4>Chairman, Students Electoral Commission</h4><div class="lc-org">Karatina University · 2019/2020</div><p>Planned, organized, coordinated, and collaborated on all activities for the general students election.</p></div>
-      <div class="leadership-card reveal"><div class="lc-icon">📣</div><h4>Class Representative</h4><div class="lc-org">Karatina University · 2016 – 2020</div><p>Represented Education Science students for four consecutive years and served as electoral college member for the Students Governing Council.</p></div>
-      <div class="leadership-card reveal"><div class="lc-icon">🤝</div><h4>Peer Counsellor</h4><div class="lc-org">Karatina University · 2017 – 2020</div><p>Provided guidance and emotional support to fellow students, promoting wellbeing across campus.</p></div>
-      <div class="leadership-card reveal"><div class="lc-icon">⛪</div><h4>Treasurer, Christian Union — Ushering Dept.</h4><div class="lc-org">Karatina University · Sep 2017 – Oct 2018</div><p>Managed finances for the ushering department of the Karatina University Christian Union.</p></div>
-      <div class="leadership-card reveal"><div class="lc-icon">💻</div><h4>Programming Trainer for Children</h4><div class="lc-org">Totosci Academy, Don Bosco · Karen, Nairobi · 2019</div><p>Volunteered to teach coding to underprivileged children, fostering early interest in technology.</p></div>
-      <div class="leadership-card reveal"><div class="lc-icon">🗳️</div><h4>IEBC Election Clerk Officer</h4><div class="lc-org">Kenya 2017 General Election · Trans-Nzoia County</div><p>Trained by IEBC and served as clerk officer at Gidea Primary School polling station.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">🌐</div><h4>IT Manager — ACMHR-K</h4><div class="lc-org">Board of Directors · Current</div><p>Manages IT and built the website for the Alliance for Cardio-Metabolic Health & Research, Kenya.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">🔬</div><h4>AXIOM Research Group Member</h4><div class="lc-org">AIMS-RIC · Current</div><p>Member of the AXIOM Research Group. Built the organization's website at axiomresearchs.org.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">🗳️</div><h4>Chairman, Electoral Commission</h4><div class="lc-org">Karatina University · 2019/2020</div><p>Planned, organized, and coordinated the general students election.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">📣</div><h4>Class Representative (4 years)</h4><div class="lc-org">Karatina University · 2016–2020</div><p>Represented Education Science students. Electoral college member for Governing Council.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">🤝</div><h4>Peer Counsellor</h4><div class="lc-org">Karatina University · 2017–2020</div><p>Provided guidance and emotional support to fellow students.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">⛪</div><h4>Treasurer, Christian Union</h4><div class="lc-org">Karatina University · 2017–2018</div><p>Managed finances for the ushering department.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Awards -->
 <section>
   <div class="section-inner">
     <div class="section-label reveal">// Awards & Honours</div>
     <div class="section-title reveal">Recognition</div>
     <div class="awards-list">
-      <div class="award-item reveal"><div class="award-icon">🏆</div><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Thesis Competition · July 2024</p></div></div>
-      <div class="award-item reveal"><div class="award-icon">🎓</div><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship for MSc at AIMS-Senegal · Oct 2021 – Jul 2022</p></div></div>
-      <div class="award-item reveal"><div class="award-icon">📜</div><div><h4>ICDL Certification & Trainer</h4><p>International Computer Driving License — certified trainer at Vatel Rwanda · 2023</p></div></div>
-      <div class="award-item reveal"><div class="award-icon">💼</div><div><h4>Techstars Startup Weekend Participant</h4><p>Business participant at Dedan Kimathi University · Sep 2019</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">🏆</div><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Competition · Jul 2024</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">🎓</div><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship for MSc at AIMS-Senegal · 2021–2022</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">📜</div><div><h4>ICDL Certification & Trainer</h4><p>Certified trainer at Vatel Rwanda · 2023</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">💼</div><div><h4>Techstars Startup Weekend</h4><p>Business participant, Dedan Kimathi University · Sep 2019</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- Workshops & Training -->
 <section class="section-alt">
   <div class="section-inner">
-    <div class="section-label reveal">// Conferences, Workshops & Training</div>
+    <div class="section-label reveal">// Conferences & Training</div>
     <div class="section-title reveal">Continuous Learning</div>
     <div class="exp-grid">
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">Ministry of Education, Rwanda — Data Preparation & Analysis Workshop</div></div><div class="exp-date">Sep – Oct 2024</div></div>
-        <p class="exp-desc">Completed courses on statistical data preparation, analysis, and data controllers for tertiary-level education.</p>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">ICTP-EAIFR-IUGG Workshop on Computational Geodynamics</div></div><div class="exp-date">Jul 2023</div></div>
-        <p class="exp-desc">Towards Building a New Expertise Across Africa — computational geodynamics modelling and simulation.</p>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">7th African School on Electronic Structure Methods & Applications (ASESMA)</div></div><div class="exp-date">Jun 2023</div></div>
-        <p class="exp-desc">Two-week intensive school on electronic structure methods and their applications in materials science.</p>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">Jobberman's Finishing School Program</div></div><div class="exp-date">May 2023</div></div>
-        <p class="exp-desc">In partnership with Mastercard Foundation — work ethics, business writing, professional attitude, growth mindset, and time management.</p>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">African School of Fundamental Physics & Applications (ASP 2022)</div></div><div class="exp-date">Nov – Dec 2022</div></div>
-        <p class="exp-desc">Renewable energies, high energy physics, astronomy, and cosmology.</p>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">6th African School of Physics (ASP 2021)</div></div><div class="exp-date">Jul 2021</div></div>
-        <p class="exp-desc">Online intensive school covering fundamental and applied physics across Africa.</p>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header"><div><div class="exp-role">Joint ICTP–IAEA Nuclear Knowledge Management School</div></div><div class="exp-date">May 2021</div></div>
-        <p class="exp-desc">Webinar series on nuclear knowledge management, completed online.</p>
-      </div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">Rwanda Ministry of Education — Data Workshop</div></div><div class="exp-date">Sep–Oct 2024</div></div><p class="exp-desc">Statistical data preparation, analysis, and data controllers for tertiary education.</p></div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">ICTP-EAIFR-IUGG Computational Geodynamics Workshop</div></div><div class="exp-date">Jul 2023</div></div><p class="exp-desc">Building new expertise across Africa — geodynamics modelling and simulation.</p></div>
+      <div class="exp-card reveal"><div class="exp-header"><div><div class="exp-role">7th ASESMA · Jobberman Finishing School · ASP 2022 · ASP 2021 · ICTP-IAEA Nuclear KM School</div></div><div class="exp-date">2021–2023</div></div><p class="exp-desc">Electronic structure methods, work ethics, business writing, renewable energies, high energy physics, nuclear knowledge management.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Memberships -->
 <section>
   <div class="section-inner">
     <div class="section-label reveal">// Memberships</div>
     <div class="section-title reveal">Professional Affiliations</div>
     <div class="membership-tags reveal">
+      <span class="membership-tag">AXIOM Research Group — AIMS-RIC</span>
+      <span class="membership-tag">ACMHR-K — Board of Directors</span>
       <span class="membership-tag">Teachers Service Commission (TSC) — Kenya</span>
-      <span class="membership-tag">African School of Fundamental Physics & Applications (ASP)</span>
+      <span class="membership-tag">African School of Fundamental Physics (ASP)</span>
       <span class="membership-tag">African Strategy for Fundamental & Applied Physics (ASFAP)</span>
       <span class="membership-tag">Karatina University Alumni</span>
-      <span class="membership-tag">Karatina University Christian Union</span>
     </div>
   </div>
 </section>
 
-<!-- Contact -->
 <section id="contact" class="contact-section">
   <div class="section-inner">
     <div class="section-label reveal">// Get in Touch</div>
     <div class="section-title reveal">Let's Connect</div>
     <p class="contact-subtitle reveal">Open to collaborations, research opportunities, and conversations about climate science, AI, and earth observation.</p>
     <div class="contact-links reveal">
-      <a href="mailto:stephen.nyaranga@aims-senegal.org" class="contact-card">
-        <div class="cc-icon">📧</div>
-        <div><div class="cc-label">AIMS-Senegal</div><div class="cc-value">stephen.nyaranga@aims-senegal.org</div></div>
-      </a>
-      <a href="mailto:snyaranga@aimsric.org" class="contact-card">
-        <div class="cc-icon">📧</div>
-        <div><div class="cc-label">AIMS-RIC</div><div class="cc-value">snyaranga@aimsric.org</div></div>
-      </a>
-      <a href="https://www.linkedin.com/in/stephennyaranga" target="_blank" rel="noopener" class="contact-card">
-        <div class="cc-icon">💼</div>
-        <div><div class="cc-label">LinkedIn</div><div class="cc-value">Stephen Nyaranga</div></div>
-      </a>
+      <a href="mailto:stephen.nyaranga@aims-senegal.org" class="contact-card"><div class="cc-icon">📧</div><div><div class="cc-label">AIMS-Senegal</div><div class="cc-value">stephen.nyaranga@aims-senegal.org</div></div></a>
+      <a href="mailto:snyaranga@aimsric.org" class="contact-card"><div class="cc-icon">📧</div><div><div class="cc-label">AIMS-RIC</div><div class="cc-value">snyaranga@aimsric.org</div></div></a>
+      <a href="https://www.linkedin.com/in/stephennyaranga" target="_blank" rel="noopener" class="contact-card"><div class="cc-icon">💼</div><div><div class="cc-label">LinkedIn</div><div class="cc-value">Stephen Nyaranga</div></div></a>
     </div>
-    <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary" style="margin-bottom:2rem">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download Full CV
-    </a>
+    <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary" style="margin-bottom:1.5rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Full CV</a>
   </div>
 </section>
-
 <footer><p>&copy; 2026 <span class="footer-name">Stephen Nyaranga</span>. All rights reserved.</p></footer>
-
 <script>
-  const reveals=document.querySelectorAll('.reveal');
-  const observer=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.1});
-  reveals.forEach(el=>observer.observe(el));
-  window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50)});
-  function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
-  document.querySelectorAll('.nav-right a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))});
+const reveals=document.querySelectorAll('.reveal');const observer=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.08});reveals.forEach(el=>observer.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50)});
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+document.querySelectorAll('.nav-right a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))});
+function toggleExpand(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 </script>
-</body>
-</html>
+</body></html>
