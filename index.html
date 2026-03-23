@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen Nyaranga — Climate Scientist & Geophysicist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-base: #f0f6fb;
+    --bg-white: #ffffff;
+    --bg-alt: #e8f1f8;
+    --bg-cream: #f5f9fd;
+    --accent: #1b6ca8;
+    --accent-light: #2a83c4;
+    --accent-dark: #134e7a;
+    --accent-bg: rgba(27,108,168,0.06);
+    --accent-border: rgba(27,108,168,0.16);
+    --warm: #b5702a;
+    --warm-bg: rgba(181,112,42,0.08);
+    --warm-border: rgba(181,112,42,0.2);
+    --slate: #4a6278;
+    --text-primary: #152231;
+    --text-body: #364757;
+    --text-secondary: #5a7189;
+    --text-muted: #8a9fb4;
+    --border: #cddbe8;
+    --border-light: #dde8f0;
+    --shadow-sm: 0 1px 3px rgba(21,34,49,0.04);
+    --shadow-md: 0 4px 20px rgba(21,34,49,0.06);
+    --shadow-lg: 0 12px 40px rgba(21,34,49,0.08);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{color:var(--text-body);font-family:'Nunito Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+  ::selection{background:var(--accent);color:#fff}
+
+  /* ========== ANIMATED GRADIENT BACKGROUND ========== */
+  .page-bg {
+    position:fixed;inset:0;z-index:0;
+    background: linear-gradient(135deg, #e8f4fd, #f0f6fb, #ddedf9, #ecf3fa, #d8e8f5, #f2f7fc);
+    background-size: 400% 400%;
+    animation: gradientShift 18s ease infinite;
+  }
+  @keyframes gradientShift {
+    0%{background-position:0% 50%}
+    25%{background-position:100% 25%}
+    50%{background-position:100% 50%}
+    75%{background-position:0% 75%}
+    100%{background-position:0% 50%}
+  }
+
+  /* Grain overlay */
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.014'/%3E%3C/svg%3E");pointer-events:none;z-index:10000}
+
+  /* All content above the animated bg */
+  nav, section, footer { position: relative; z-index: 1; }
+
+  /* ========== NAV ========== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(240,246,251,0.88);backdrop-filter:blur(22px);border-bottom:1px solid var(--border-light);transition:all .4s ease}
+  nav.scrolled{padding:.7rem 3rem;background:rgba(240,246,251,0.96);box-shadow:var(--shadow-sm)}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;color:var(--text-primary);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+  .nav-logo span{color:var(--accent)}
+  .nav-right{display:flex;gap:1.6rem;align-items:center;margin-left:auto;flex-wrap:nowrap}
+  .nav-right a{color:var(--text-secondary);text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:color .3s;position:relative;white-space:nowrap}
+  .nav-right a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s ease}
+  .nav-right a:hover{color:var(--accent)}
+  .nav-right a:hover::after{width:100%}
+  .nav-cta{background:var(--accent)!important;color:#fff!important;padding:.42rem 1rem;border-radius:6px;font-weight:700!important;transition:transform .2s,box-shadow .3s!important}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(27,108,168,0.25)}
+  .nav-cta::after{display:none!important}
+
+  .hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;z-index:200}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;transition:all .3s}
+
+  /* ========== HERO ========== */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:6rem 3rem 4rem;overflow:hidden}
+  .hero-deco{position:absolute;border-radius:50%;pointer-events:none}
+  .hero-deco.one{width:550px;height:550px;background:radial-gradient(circle,rgba(27,108,168,0.06) 0%,transparent 70%);top:-8%;right:-10%}
+  .hero-deco.two{width:420px;height:420px;background:radial-gradient(circle,rgba(181,112,42,0.04) 0%,transparent 70%);bottom:-5%;left:-6%}
+  .hero-topo{position:absolute;inset:0;opacity:.022;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='200' cy='200' rx='180' ry='120' fill='none' stroke='%231b6ca8' stroke-width='1'/%3E%3Cellipse cx='200' cy='200' rx='140' ry='90' fill='none' stroke='%231b6ca8' stroke-width='0.8'/%3E%3Cellipse cx='200' cy='200' rx='100' ry='60' fill='none' stroke='%231b6ca8' stroke-width='0.6'/%3E%3Cellipse cx='200' cy='200' rx='60' ry='35' fill='none' stroke='%231b6ca8' stroke-width='0.5'/%3E%3C/svg%3E");background-size:400px}
+  .hero-content{max-width:920px;position:relative;z-index:2}
+  .hero-tag{display:inline-flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .2s}
+  .hero-tag .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.5rem);line-height:1.05;letter-spacing:-.02em;color:var(--text-primary);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .4s}
+  .hero h1 .accent{color:var(--accent)}
+  .hero-desc{font-size:1.15rem;color:var(--text-secondary);max-width:650px;line-height:1.8;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s ease forwards .6s}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards .8s}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:8px;font-family:'Nunito Sans',sans-serif;font-size:.95rem;font-weight:700;text-decoration:none;transition:all .3s ease;cursor:pointer;border:none}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(27,108,168,0.22)}
+  .btn-outline{background:transparent;color:var(--text-primary);border:1.5px solid var(--border)}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border);opacity:0;animation:fadeUp .8s ease forwards 1s}
+  .stat-item .stat-number{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--accent);font-weight:700}
+  .stat-item .stat-label{font-size:.82rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem;font-weight:600}
+
+  /* ========== SECTIONS ========== */
+  section{padding:7rem 3rem}
+  .section-inner{max-width:1100px;margin:0 auto}
+  .section-label{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:.2em;margin-bottom:.8rem;font-weight:500}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--text-primary);margin-bottom:3rem;line-height:1.2}
+  .section-alt{background:rgba(255,255,255,0.55);backdrop-filter:blur(4px);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
+
+  /* ========== ABOUT ========== */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .about-text p{color:var(--text-body);margin-bottom:1.2rem;font-size:1.05rem}
+  .about-highlights{display:flex;flex-direction:column;gap:1.1rem}
+  .highlight-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.4rem;transition:all .3s ease;box-shadow:var(--shadow-sm)}
+  .highlight-card:hover{border-color:var(--accent-border);transform:translateX(4px);box-shadow:var(--shadow-md)}
+  .highlight-card .hc-icon{font-size:1.4rem;margin-bottom:.4rem}
+  .highlight-card h4{font-size:.95rem;font-weight:700;color:var(--text-primary);margin-bottom:.25rem}
+  .highlight-card p{font-size:.85rem;color:var(--text-secondary);line-height:1.5}
+
+  /* ========== TIMELINE ========== */
+  .timeline{position:relative;padding-left:3rem}
+  .timeline::before{content:'';position:absolute;top:0;bottom:0;left:7px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--border))}
+  .timeline-item{position:relative;margin-bottom:2.8rem;padding-bottom:.8rem}
+  .timeline-item::before{content:'';position:absolute;left:-2.85rem;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg-base);border:2.5px solid var(--accent);z-index:2;transition:all .3s}
+  .timeline-item:hover::before{background:var(--accent);box-shadow:0 0 0 5px rgba(27,108,168,0.1)}
+  .timeline-date{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--warm);letter-spacing:.05em;margin-bottom:.35rem;font-weight:500}
+  .timeline-item h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--text-primary);margin-bottom:.15rem}
+  .timeline-inst{font-size:.88rem;color:var(--accent);margin-bottom:.45rem;font-weight:600}
+  .timeline-details{color:var(--text-body);font-size:.9rem;line-height:1.7}
+  .timeline-badge{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.73rem;font-weight:700;margin-top:.5rem;margin-right:.3rem}
+  .badge-distinction{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
+  .badge-honors{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
+  .badge-flying{background:rgba(107,115,128,0.08);color:#4a5568;border:1px solid rgba(107,115,128,0.2)}
+  .timeline-activities{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+  .timeline-act{display:inline-block;padding:.16rem .55rem;border-radius:4px;font-size:.73rem;font-weight:600;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
+  .timeline-dissertation{margin-top:.6rem;padding:.8rem 1rem;background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:8px;font-size:.85rem;color:var(--accent-dark);line-height:1.5}
+  .timeline-dissertation strong{font-weight:700}
+
+  /* ========== EXPERIENCE ========== */
+  .exp-grid{display:flex;flex-direction:column;gap:1.4rem}
+  .exp-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:1.8rem 2rem;transition:all .35s ease;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .exp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
+  .exp-card:hover{border-color:var(--accent-border);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .exp-card:hover::before{opacity:1}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;flex-wrap:wrap;gap:.5rem}
+  .exp-role{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text-primary)}
+  .exp-date{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--warm);white-space:nowrap;font-weight:500}
+  .exp-company{font-size:.9rem;color:var(--accent);font-weight:600;margin-bottom:.6rem}
+  .exp-desc{color:var(--text-body);font-size:.9rem;line-height:1.7}
+  .exp-type{display:inline-block;padding:.14rem .55rem;border-radius:4px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-left:.4rem;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border);vertical-align:middle;font-family:'Nunito Sans',sans-serif}
+
+  /* ========== RESEARCH ========== */
+  .research-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:16px;padding:2.2rem;position:relative;overflow:hidden;margin-bottom:1.8rem;box-shadow:var(--shadow-sm);transition:all .3s}
+  .research-card:hover{box-shadow:var(--shadow-md)}
+  .research-card::after{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(27,108,168,0.04) 0%,transparent 70%);pointer-events:none}
+  .research-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.25rem .7rem;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem;font-weight:500}
+  .tag-current{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
+  .tag-completed{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
+  .research-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--text-primary);margin-bottom:.6rem;line-height:1.4;position:relative;z-index:1}
+  .research-meta{font-size:.85rem;color:var(--text-muted);margin-bottom:.8rem}
+  .research-desc{color:var(--text-body);font-size:.92rem;line-height:1.7;position:relative;z-index:1}
+  .research-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;color:var(--accent);text-decoration:none;font-weight:700;font-size:.88rem;transition:gap .3s}
+  .research-link:hover{gap:.7rem}
+
+  /* ========== SKILLS ========== */
+  .skills-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.3rem}
+  .skill-category{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.6rem;transition:all .3s;box-shadow:var(--shadow-sm)}
+  .skill-category:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
+  .skill-cat-title{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem;font-weight:500}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .skill-tag{padding:.3rem .8rem;border-radius:6px;font-size:.8rem;color:var(--text-body);background:var(--bg-base);border:1px solid var(--border-light);transition:all .25s}
+  .skill-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
+
+  /* ========== AWARDS ========== */
+  .awards-list{display:flex;flex-direction:column;gap:1.1rem}
+  .award-item{display:flex;gap:1.1rem;align-items:flex-start;padding:1.3rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;transition:all .3s;box-shadow:var(--shadow-sm)}
+  .award-item:hover{border-color:var(--warm-border);transform:translateX(4px);box-shadow:var(--shadow-md)}
+  .award-icon{font-size:1.6rem;line-height:1;flex-shrink:0}
+  .award-item h4{font-size:.95rem;color:var(--text-primary);font-weight:700;margin-bottom:.15rem}
+  .award-item p{font-size:.85rem;color:var(--text-muted)}
+
+  /* ========== LEADERSHIP ========== */
+  .leadership-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+  .leadership-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.4rem;transition:all .3s;box-shadow:var(--shadow-sm)}
+  .leadership-card:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
+  .leadership-card .lc-icon{font-size:1.3rem;margin-bottom:.4rem}
+  .leadership-card h4{font-size:.92rem;font-weight:700;color:var(--text-primary);margin-bottom:.2rem}
+  .leadership-card .lc-org{font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:.3rem}
+  .leadership-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.5}
+
+  /* ========== MEMBERSHIPS ========== */
+  .membership-tags{display:flex;flex-wrap:wrap;gap:.6rem}
+  .membership-tag{padding:.45rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--text-body);background:var(--bg-white);border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:all .25s}
+  .membership-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
+
+  /* ========== CONTACT ========== */
+  .contact-section{text-align:center}
+  .contact-section .section-title{margin-bottom:1rem}
+  .contact-subtitle{color:var(--text-secondary);font-size:1.05rem;margin-bottom:2.5rem;max-width:520px;margin-left:auto;margin-right:auto}
+  .contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+  .contact-card{display:flex;align-items:center;gap:.7rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1rem 1.4rem;text-decoration:none;color:var(--text-primary);transition:all .3s;box-shadow:var(--shadow-sm)}
+  .contact-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .contact-card .cc-icon{font-size:1.1rem}
+  .contact-card .cc-label{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .contact-card .cc-value{font-size:.85rem;font-weight:600}
+
+  footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--text-muted);background:rgba(255,255,255,0.4)}
+  footer .footer-name{color:var(--accent);font-weight:700}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  @media(max-width:1050px){
+    .nav-right{gap:1.1rem}
+    .nav-right a{font-size:.72rem}
+  }
+  @media(max-width:900px){
+    nav{padding:1rem 1.5rem}
+    .nav-right{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(240,246,251,0.98);flex-direction:column;justify-content:center;align-items:center;gap:2rem;backdrop-filter:blur(20px)}
+    .nav-right.open{display:flex}
+    .nav-right a{font-size:1rem}
+    .hamburger{display:flex}
+    section{padding:4rem 1.5rem}
+    .hero{padding:5rem 1.5rem 3rem}
+    .about-grid{grid-template-columns:1fr;gap:2rem}
+    .hero-stats{gap:1.5rem;flex-wrap:wrap}
+    .exp-header{flex-direction:column}
+    .contact-links{flex-direction:column;align-items:center}
+    .leadership-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:600px){
+    .hero h1{font-size:2.4rem}
+    .hero-stats{gap:1.2rem}
+    .stat-item .stat-number{font-size:1.6rem}
+    .skills-categories{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="page-bg"></div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Stephen <span>Nyaranga</span></a>
+  <div class="nav-right" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#research">Research</a>
+    <a href="#skills">Skills</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#contact">Contact</a>
+    <a href="Stephen_Nyaranga_CV.pdf" download class="nav-cta">Download CV</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-deco one"></div>
+  <div class="hero-deco two"></div>
+  <div class="hero-topo"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="dot"></span> PhD Researcher — Climate Science</div>
+    <h1>Stephen<br><span class="accent">Nyaranga</span></h1>
+    <p class="hero-desc">Climate scientist and geophysicist harnessing deep learning and multi-sensor Earth observation to map flood risks in Rwanda's mountainous cities. Bridging physics, data science, and real-world impact across four countries.</p>
+    <div class="hero-actions">
+      <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+      <a href="#research" class="btn btn-outline">View Research</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Degrees Earned</div></div>
+      <div class="stat-item"><div class="stat-number">4+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">Countries</div></div>
+      <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Languages</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">// About Me</div>
+    <div class="section-title reveal">A diligent scientist driven by<br>curiosity and real-world impact</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I am a Kenyan-born climate scientist and geophysicist currently pursuing my PhD at AIMS Research and Innovation Center in collaboration with Imperial College London, where I develop multi-sensor deep learning frameworks for flood depth estimation in Rwanda's mountainous cities.</p>
+        <p>My academic journey spans four countries — Kenya, Senegal, Rwanda, and the UK — earning me a BSc with First Class Honours in Education Science (Physics/Mathematics), an MSc in Mathematical Sciences with Distinction from AIMS-Senegal, and an MSc in Geophysics from ICTP-EAIFR.</p>
+        <p>Beyond research, I bring hands-on professional experience in IT leadership, teaching, digital transformation, student governance, peer counselling, and community service — from training children in computer programming at Don Bosco Karen to chairing university electoral commissions.</p>
+      </div>
+      <div class="about-highlights reveal">
+        <div class="highlight-card"><div class="hc-icon">🌍</div><h4>Climate & Flood Risk</h4><p>Using SAR time-series, optical EO, and terrain data to model floods in Musanze & Rubavu, Rwanda.</p></div>
+        <div class="highlight-card"><div class="hc-icon">🤖</div><h4>AI & Data Science</h4><p>Deep learning, machine learning, and geospatial analytics for environmental applications.</p></div>
+        <div class="highlight-card"><div class="hc-icon">🎓</div><h4>Education & Outreach</h4><p>Passionate teacher, ICDL trainer, and programming instructor with experience across all levels.</p></div>
+        <div class="highlight-card"><div class="hc-icon">🏆</div><h4>Award-Winning Communicator</h4><p>Best winner of ICTP-EAIFR 3-Minute Thesis Competition, 2024.</p></div>
+        <div class="highlight-card"><div class="hc-icon">🤝</div><h4>Leader & Public Servant</h4><p>Student representative, electoral commission chair, peer counsellor, and IEBC election official.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" class="section-alt">
+  <div class="section-inner">
+    <div class="section-label reveal">// Education</div>
+    <div class="section-title reveal">Academic Journey</div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">Oct 2025 — Present</div>
+        <h3>PhD in Climate Science</h3>
+        <div class="timeline-inst">AIMS Research & Innovation Center / Imperial College London</div>
+        <p class="timeline-details">Research on Multi-Sensor Deep Learning Framework for Flood Depth Estimation in Mountainous Cities, integrating SAR Time-Series, Optical EO, and Terrain Metrics in Musanze & Rubavu, Rwanda.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">Jan 2023 — Dec 2024</div>
+        <h3>Pursued an MSc Geophysics</h3>
+        <div class="timeline-inst">ICTP-East Africa Institute for Fundamental Research (ICTP-EAIFR), University of Rwanda, Kigali</div>
+        <p class="timeline-details">Coursework in seismology, geodesy, InSAR, computational geodynamics, earthquake mechanics, atmospheric physics, GPS geodesy, physics of volcanoes, and theoretical & observational seismology.</p>
+        <div class="timeline-dissertation"><strong>Thesis:</strong> Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020–2024 Sentinel-1 InSAR Survey.</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">Oct 2021 — Jul 2022</div>
+        <h3>MSc Mathematical Sciences — Climate Science / Data Science</h3>
+        <div class="timeline-inst">African Institute for Mathematical Sciences (AIMS-Senegal), Mbour</div>
+        <p class="timeline-details">Coursework in machine learning, AI, climate dynamics, data science, programming for data science, knowledge representation and reasoning, quantum mechanics and quantum computing, statistical learning, and classical mechanics. Mastercard Foundation Scholar.</p>
+        <div class="timeline-dissertation"><strong>Dissertation:</strong> Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998.</div>
+        <span class="timeline-badge badge-distinction">Graduated with Distinction</span>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">Aug 2016 — Mar 2021</div>
+        <h3>BSc Education Science (Physics / Mathematics)</h3>
+        <div class="timeline-inst">Karatina University, Nyeri, Kenya</div>
+        <p class="timeline-details">Solid grounding in physics and mathematics with teacher training. Active in student governance, peer counselling, and Christian Union leadership. Registered with Teachers Service Commission (TSC), Kenya.</p>
+        <span class="timeline-badge badge-honors">First Class Honours</span>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2012 — 2015</div>
+        <h3>Secondary Education</h3>
+        <div class="timeline-inst">Kobos Boys High School, Trans-Nzoia County, Kenya</div>
+        <p class="timeline-details">Served as Student Representative and Librarian. Actively participated in co-curricular activities including Science Congress competitions and Music Festivals.</p>
+        <div class="timeline-activities">
+          <span class="timeline-act">Student Representative</span>
+          <span class="timeline-act">Librarian</span>
+          <span class="timeline-act">Science Congress</span>
+          <span class="timeline-act">Music Festivals</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">Primary Education</div>
+        <h3>Lelkina Primary School</h3>
+        <div class="timeline-inst">Kapomboi Ward, Kenya</div>
+        <p class="timeline-details">Built a strong academic foundation from an early age, graduating with outstanding results.</p>
+        <span class="timeline-badge badge-flying">Passed with Flying Colours</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label reveal">// Professional Experience</div>
+    <div class="section-title reveal">Where I've Contributed</div>
+    <div class="exp-grid">
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Head of IT Department <span class="exp-type">Full-Time</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div>
+          <div class="exp-date">Jul 2024 — Oct 2025</div>
+        </div>
+        <p class="exp-desc">Developed scheduling and calendar systems used across all departments (HR, Operations, Academics, Communications, Admissions, and Finance). Ensured Canvas, Moodle, and Triade LMS customization and enhanced the online learning experience. Built an in-house platform for tracking internships, lecturers, hours, and attendance. Provided comprehensive IT support, troubleshooting, and repair for all electronic equipment. Developed software solutions for institutional challenges. Managed hardware and software inventory, monitored internet usage, maintained information security, and ensured adherence to IT policies. Delivered IT training, orientation, and weekly tips to lecturers, staff, and students. Monitored ICDL course completion and tools such as Grammarly, OneDrive, and SharePoint across the institution.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Assistant Lecturer <span class="exp-type">Part-Time</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div>
+          <div class="exp-date">Jun 2025 — Oct 2025</div>
+        </div>
+        <p class="exp-desc">Appointed to the academic rank of Assistant Lecturer for the 2025–2026 academic year in recognition of performance in teaching and contributions to Vatel Rwanda's academic mission. Delivered the ICDL (International Computer Driving License) course to lecturers, staff, and students. Led the IT Department as Head of Department. Contributed to academic quality assurance and digital transformation of teaching. Facilitated AI integration in curriculum and staff development.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">IT Associate — MCF Enrichment Program <span class="exp-type">Internship</span></div><div class="exp-company">Vatel Rwanda — Kigali, Rwanda</div></div>
+          <div class="exp-date">Jul 2023 — Jul 2024</div>
+        </div>
+        <p class="exp-desc">Introduced and implemented AI tools into teaching methodologies, enabling innovative learning experiences for students and empowering faculty to adopt modern technologies. Successfully transitioned to Canvas Instructure, migrating courses and ensuring functionality with minimal disruption. Designed and conducted training programs for students, staff, and faculty on AI applications, ICDL modules, and digital literacy. Proactively managed IT systems, ensuring uninterrupted Wi-Fi access, maintaining critical devices, and resolving technical challenges. Supervised technical support for exams and optimized digital learning platforms.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Physics & Mathematics Teacher</div><div class="exp-company">Kathiani Boy's High School — Machakos, Kenya</div></div>
+          <div class="exp-date">May — Oct 2021</div>
+        </div>
+        <p class="exp-desc">Taught Physics and Mathematics at the secondary school level. Prepared lessons and teaching materials, assessed student progress, and refined skills as a communicator and motivator.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Physics & Mathematics Teacher</div><div class="exp-company">Ntanki Secondary School — Meru, Kenya</div></div>
+          <div class="exp-date">Jan — Apr 2021</div>
+        </div>
+        <p class="exp-desc">Prepared lessons and teaching materials for Mathematics and Physics. Developed lesson plans and assessed student progress.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Teaching Practice & Undergraduate Teaching</div><div class="exp-company">Multiple Schools — Trans-Nzoia & Kiambu Counties, Kenya</div></div>
+          <div class="exp-date">2016 — 2019</div>
+        </div>
+        <p class="exp-desc">Taught Physics and Mathematics at Kobos Secondary School (2016), Lessos Secondary School (2017), Handege Secondary School (2018), and completed teaching practice at Mururia Boys High School (2019).</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Computer Programming Trainer <span class="exp-type">Volunteer</span></div><div class="exp-company">Totosci Academy, Don Bosco — Karen, Nairobi</div></div>
+          <div class="exp-date">Feb — Mar 2019</div>
+        </div>
+        <p class="exp-desc">Trained needy children in computer programming at the Don Bosco centre in Karen, Nairobi, fostering early interest in technology and digital literacy.</p>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div><div class="exp-role">Clerk Officer — General Election <span class="exp-type">IEBC</span></div><div class="exp-company">Independent Electoral & Boundaries Commission — Trans-Nzoia, Kenya</div></div>
+          <div class="exp-date">Aug 2017</div>
+        </div>
+        <p class="exp-desc">Completed IEBC training at Kitale National Showground and served as a clerk officer at Gidea Primary School polling station during Kenya's 2017 general election.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Research -->
+<section id="research" class="section-alt">
+  <div class="section-inner">
+    <div class="section-label reveal">// Research</div>
+    <div class="section-title reveal">Current & Past Work</div>
+
+    <div class="research-card reveal">
+      <span class="research-tag tag-current">Current · PhD Research</span>
+      <h3>Multi-Sensor Deep Learning Framework for Flood Depth Estimation in Mountainous Cities</h3>
+      <div class="research-meta">AIMS-RIC / Imperial College London · Oct 2025 – Present</div>
+      <p class="research-desc">Integrating SAR time-series, optical Earth observation, and terrain metrics to estimate flood depth in Musanze and Rubavu, Rwanda. The framework aims to improve early-warning systems and disaster resilience in vulnerable mountainous urban environments.</p>
+    </div>
+
+    <div class="research-card reveal">
+      <span class="research-tag tag-completed">Completed · MSc Thesis (Geophysics)</span>
+      <h3>Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020–2024 Sentinel-1 InSAR Survey</h3>
+      <div class="research-meta">ICTP-EAIFR, University of Rwanda · 2023 – 2024</div>
+      <p class="research-desc">Conducted time-series Interferometric Synthetic Aperture Radar (InSAR) analysis using Sentinel-1 data to monitor ground deformation at Kenya's Olkaria geothermal field over a four-year period, providing insights into subsurface geothermal dynamics and surface displacement patterns.</p>
+    </div>
+
+    <div class="research-card reveal">
+      <span class="research-tag tag-completed">Completed · MSc Dissertation</span>
+      <h3>Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998</h3>
+      <div class="research-meta">AIMS-Senegal · 2021 – 2022</div>
+      <p class="research-desc">Investigated the role of atmospheric rivers in driving surface melting events over the Pine Island Glacier in West Antarctica, analysing climate dynamics across two significant melt years. Completed as a Mastercard Foundation Scholar, graduated with Distinction.</p>
+      <a href="https://drive.google.com/drive/folders/1EChAvIUcMb2n6QWsJx3RQjyseSVFw1y9" target="_blank" rel="noopener" class="research-link">
+        View Thesis Project
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label reveal">// Skills & Tools</div>
+    <div class="section-title reveal">Technical Arsenal</div>
+    <div class="skills-categories">
+      <div class="skill-category reveal"><div class="skill-cat-title">Programming</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">C / C++</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Fortran</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Data Science & ML</div><div class="skill-tags"><span class="skill-tag">Deep Learning</span><span class="skill-tag">Machine Learning</span><span class="skill-tag">Data Science</span><span class="skill-tag">Statistical Learning</span><span class="skill-tag">AI</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Earth Observation</div><div class="skill-tags"><span class="skill-tag">SAR Imagery</span><span class="skill-tag">Optical EO</span><span class="skill-tag">GPS Geodesy</span><span class="skill-tag">InSAR</span><span class="skill-tag">Climate Dynamics</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Tools & Platforms</div><div class="skill-tags"><span class="skill-tag">Linux</span><span class="skill-tag">LaTeX</span><span class="skill-tag">Microsoft Office</span><span class="skill-tag">Git</span><span class="skill-tag">Canvas LMS</span><span class="skill-tag">Moodle</span><span class="skill-tag">SharePoint</span><span class="skill-tag">OneDrive</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Languages</div><div class="skill-tags"><span class="skill-tag">English (Fluent)</span><span class="skill-tag">Swahili (Fluent)</span><span class="skill-tag">Luhya (Fluent)</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">Soft Skills</div><div class="skill-tags"><span class="skill-tag">Teaching</span><span class="skill-tag">Communication</span><span class="skill-tag">Problem Solving</span><span class="skill-tag">Leadership</span><span class="skill-tag">Peer Counselling</span></div></div>
+      <div class="skill-category reveal"><div class="skill-cat-title">IT Management & EdTech</div><div class="skill-tags"><span class="skill-tag">Digital Transformation</span><span class="skill-tag">LMS Administration</span><span class="skill-tag">IT Support & Troubleshooting</span><span class="skill-tag">Program Management</span><span class="skill-tag">ICDL Training</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Leadership & Service -->
+<section id="leadership" class="section-alt">
+  <div class="section-inner">
+    <div class="section-label reveal">// Leadership & Community Service</div>
+    <div class="section-title reveal">Beyond the Classroom</div>
+    <div class="leadership-grid">
+      <div class="leadership-card reveal"><div class="lc-icon">🗳️</div><h4>Chairman, Students Electoral Commission</h4><div class="lc-org">Karatina University · 2019/2020</div><p>Planned, organized, coordinated, and collaborated on all activities for the general students election.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">📣</div><h4>Class Representative</h4><div class="lc-org">Karatina University · 2016 – 2020</div><p>Represented Education Science students for four consecutive years and served as electoral college member for the Students Governing Council.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">🤝</div><h4>Peer Counsellor</h4><div class="lc-org">Karatina University · 2017 – 2020</div><p>Provided guidance and emotional support to fellow students, promoting wellbeing across campus.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">⛪</div><h4>Treasurer, Christian Union — Ushering Dept.</h4><div class="lc-org">Karatina University · Sep 2017 – Oct 2018</div><p>Managed finances for the ushering department of the Karatina University Christian Union.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">💻</div><h4>Programming Trainer for Children</h4><div class="lc-org">Totosci Academy, Don Bosco · Karen, Nairobi · 2019</div><p>Volunteered to teach coding to underprivileged children, fostering early interest in technology.</p></div>
+      <div class="leadership-card reveal"><div class="lc-icon">🗳️</div><h4>IEBC Election Clerk Officer</h4><div class="lc-org">Kenya 2017 General Election · Trans-Nzoia County</div><p>Trained by IEBC and served as clerk officer at Gidea Primary School polling station.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Awards -->
+<section>
+  <div class="section-inner">
+    <div class="section-label reveal">// Awards & Honours</div>
+    <div class="section-title reveal">Recognition</div>
+    <div class="awards-list">
+      <div class="award-item reveal"><div class="award-icon">🏆</div><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Thesis Competition · July 2024</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">🎓</div><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship for MSc at AIMS-Senegal · Oct 2021 – Jul 2022</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">📜</div><div><h4>ICDL Certification & Trainer</h4><p>International Computer Driving License — certified trainer at Vatel Rwanda · 2023</p></div></div>
+      <div class="award-item reveal"><div class="award-icon">💼</div><div><h4>Techstars Startup Weekend Participant</h4><p>Business participant at Dedan Kimathi University · Sep 2019</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Workshops & Training -->
+<section class="section-alt">
+  <div class="section-inner">
+    <div class="section-label reveal">// Conferences, Workshops & Training</div>
+    <div class="section-title reveal">Continuous Learning</div>
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">Ministry of Education, Rwanda — Data Preparation & Analysis Workshop</div></div><div class="exp-date">Sep – Oct 2024</div></div>
+        <p class="exp-desc">Completed courses on statistical data preparation, analysis, and data controllers for tertiary-level education.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">ICTP-EAIFR-IUGG Workshop on Computational Geodynamics</div></div><div class="exp-date">Jul 2023</div></div>
+        <p class="exp-desc">Towards Building a New Expertise Across Africa — computational geodynamics modelling and simulation.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">7th African School on Electronic Structure Methods & Applications (ASESMA)</div></div><div class="exp-date">Jun 2023</div></div>
+        <p class="exp-desc">Two-week intensive school on electronic structure methods and their applications in materials science.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">Jobberman's Finishing School Program</div></div><div class="exp-date">May 2023</div></div>
+        <p class="exp-desc">In partnership with Mastercard Foundation — work ethics, business writing, professional attitude, growth mindset, and time management.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">African School of Fundamental Physics & Applications (ASP 2022)</div></div><div class="exp-date">Nov – Dec 2022</div></div>
+        <p class="exp-desc">Renewable energies, high energy physics, astronomy, and cosmology.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">6th African School of Physics (ASP 2021)</div></div><div class="exp-date">Jul 2021</div></div>
+        <p class="exp-desc">Online intensive school covering fundamental and applied physics across Africa.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header"><div><div class="exp-role">Joint ICTP–IAEA Nuclear Knowledge Management School</div></div><div class="exp-date">May 2021</div></div>
+        <p class="exp-desc">Webinar series on nuclear knowledge management, completed online.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Memberships -->
+<section>
+  <div class="section-inner">
+    <div class="section-label reveal">// Memberships</div>
+    <div class="section-title reveal">Professional Affiliations</div>
+    <div class="membership-tags reveal">
+      <span class="membership-tag">Teachers Service Commission (TSC) — Kenya</span>
+      <span class="membership-tag">African School of Fundamental Physics & Applications (ASP)</span>
+      <span class="membership-tag">African Strategy for Fundamental & Applied Physics (ASFAP)</span>
+      <span class="membership-tag">Karatina University Alumni</span>
+      <span class="membership-tag">Karatina University Christian Union</span>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="section-label reveal">// Get in Touch</div>
+    <div class="section-title reveal">Let's Connect</div>
+    <p class="contact-subtitle reveal">Open to collaborations, research opportunities, and conversations about climate science, AI, and earth observation.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:stephen.nyaranga@aims-senegal.org" class="contact-card">
+        <div class="cc-icon">📧</div>
+        <div><div class="cc-label">AIMS-Senegal</div><div class="cc-value">stephen.nyaranga@aims-senegal.org</div></div>
+      </a>
+      <a href="mailto:snyaranga@aimsric.org" class="contact-card">
+        <div class="cc-icon">📧</div>
+        <div><div class="cc-label">AIMS-RIC</div><div class="cc-value">snyaranga@aimsric.org</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/stephennyaranga" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-icon">💼</div>
+        <div><div class="cc-label">LinkedIn</div><div class="cc-value">Stephen Nyaranga</div></div>
+      </a>
+    </div>
+    <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary" style="margin-bottom:2rem">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Full CV
+    </a>
+  </div>
+</section>
+
+<footer><p>&copy; 2026 <span class="footer-name">Stephen Nyaranga</span>. All rights reserved.</p></footer>
+
+<script>
+  const reveals=document.querySelectorAll('.reveal');
+  const observer=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.1});
+  reveals.forEach(el=>observer.observe(el));
+  window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50)});
+  function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+  document.querySelectorAll('.nav-right a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))});
+</script>
+</body>
+</html>
