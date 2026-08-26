@@ -39,7 +39,8 @@ section{padding:5rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.2vw,2.4rem);color:var(--text-primary);margin-bottom:2rem;line-height:1.2}
 .section-alt{background:rgba(255,255,255,0.55);backdrop-filter:blur(4px);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-.about-text p{color:var(--text-body);margin-bottom:.9rem;font-size:.95rem}.about-text a{color:var(--accent)}
+.about-text p{color:var(--text-body);margin-bottom:.9rem;font-size:.95rem}
+.about-text a{color:var(--accent)}
 .about-highlights{display:flex;flex-direction:column;gap:.8rem}
 .hc{background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1rem;transition:all .3s;box-shadow:var(--shadow-sm)}.hc:hover{border-color:var(--accent-border);transform:translateX(3px);box-shadow:var(--shadow-md)}
 .hc .icon{font-size:1.2rem;margin-bottom:.2rem}.hc h4{font-size:.85rem;font-weight:700;color:var(--text-primary);margin-bottom:.15rem}.hc p{font-size:.78rem;color:var(--text-secondary);line-height:1.4}
@@ -53,7 +54,6 @@ section{padding:5rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
 .bd{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}.bh{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}.bf{background:rgba(107,115,128,0.08);color:#4a5568;border:1px solid rgba(107,115,128,0.2)}
 .tl-acts{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.4rem}.tl-act{padding:.12rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
 .tl-dis{margin-top:.4rem;padding:.6rem .8rem;background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:8px;font-size:.8rem;color:var(--accent-dark);line-height:1.5}.tl-dis strong{font-weight:700}
-.tl-sup{margin-top:.4rem;font-size:.78rem;color:var(--text-muted);line-height:1.5}
 .eg{display:flex;flex-direction:column;gap:1rem}
 .ec{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.4rem 1.6rem;transition:all .3s;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
 .ec::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}.ec:hover{border-color:var(--accent-border);transform:translateY(-2px);box-shadow:var(--shadow-lg)}.ec:hover::before{opacity:1}
@@ -65,6 +65,7 @@ section{padding:5rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
 .ec-type{display:inline-block;padding:.1rem .45rem;border-radius:4px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-left:.3rem;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border);vertical-align:middle}
 .vm{color:var(--accent);font-size:.8rem;font-weight:600;cursor:pointer;border:none;background:none;padding:.2rem 0;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s;margin-top:.3rem}.vm:hover{gap:.5rem}.vm svg{transition:transform .3s}.vm.open svg{transform:rotate(180deg)}
 .expd{max-height:0;overflow:hidden;transition:max-height .4s ease}.expd.open{max-height:600px}
+/* Projects */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.2rem}
 .proj-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);transition:all .3s}.proj-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .proj-preview{width:100%;height:200px;border:none;border-bottom:1px solid var(--border-light);background:var(--bg-base)}
@@ -72,12 +73,14 @@ section{padding:5rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
 .proj-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.15rem .5rem;border-radius:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:500;display:inline-block;margin-bottom:.5rem}
 .proj-body h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--text-primary);margin-bottom:.3rem;line-height:1.3}
 .proj-body p{font-size:.82rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.6rem}
-.proj-link{display:inline-flex;align-items:center;gap:.3rem;color:var(--accent);text-decoration:none;font-weight:700;font-size:.82rem;transition:gap .3s;margin-right:.8rem}.proj-link:hover{gap:.5rem}
+.proj-link{display:inline-flex;align-items:center;gap:.3rem;color:var(--accent);text-decoration:none;font-weight:700;font-size:.82rem;transition:gap .3s}.proj-link:hover{gap:.5rem}
+/* Photo Carousel */
 .carousel-section{padding:3rem 0;overflow:hidden}
 .carousel-track{display:flex;gap:1rem;animation:scroll 30s linear infinite;width:max-content}
 .carousel-track:hover{animation-play-state:paused}
 .carousel-img{height:200px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:var(--shadow-md)}
 @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* Research */
 .rc{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:1.8rem;position:relative;overflow:hidden;margin-bottom:1.2rem;box-shadow:var(--shadow-sm);transition:all .3s}.rc:hover{box-shadow:var(--shadow-md)}
 .rc-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.2rem .6rem;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;font-weight:500}
 .tc{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}.td{background:var(--warm-bg);color:var(--warm);border:1px solid var(--warm-border)}
@@ -85,20 +88,26 @@ section{padding:5rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
 .rc-meta{font-size:.8rem;color:var(--text-muted);margin-bottom:.5rem}
 .rc-desc{color:var(--text-body);font-size:.85rem;line-height:1.7}
 .rc-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:.7rem;color:var(--accent);text-decoration:none;font-weight:700;font-size:.82rem;transition:gap .3s}.rc-link:hover{gap:.6rem}
+/* Skills */
 .sk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
 .sk{background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1.2rem;transition:all .3s;box-shadow:var(--shadow-sm)}.sk:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
 .sk-t{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.6rem;font-weight:500}
 .sk-tags{display:flex;flex-wrap:wrap;gap:.35rem}.sk-tag{padding:.25rem .65rem;border-radius:6px;font-size:.78rem;color:var(--text-body);background:var(--bg-base);border:1px solid var(--border-light);transition:all .25s}.sk-tag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
+/* Leadership */
 .lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
 .lc{background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:1rem;transition:all .3s;box-shadow:var(--shadow-sm)}.lc:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md)}
 .lc .icon{font-size:1.1rem;margin-bottom:.2rem}.lc h4{font-size:.84rem;font-weight:700;color:var(--text-primary);margin-bottom:.1rem}.lc .org{font-size:.75rem;color:var(--accent);font-weight:600;margin-bottom:.15rem}.lc p{font-size:.78rem;color:var(--text-secondary);line-height:1.4}
+/* Awards */
 .al{display:flex;flex-direction:column;gap:.8rem}
 .ai{display:flex;gap:.9rem;align-items:flex-start;padding:1rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;transition:all .3s;box-shadow:var(--shadow-sm)}.ai:hover{border-color:var(--warm-border);transform:translateX(3px);box-shadow:var(--shadow-md)}
 .ai-icon{font-size:1.4rem;line-height:1;flex-shrink:0}.ai h4{font-size:.85rem;color:var(--text-primary);font-weight:700;margin-bottom:.1rem}.ai p{font-size:.78rem;color:var(--text-muted)}
+/* Memberships */
 .mt{display:flex;flex-wrap:wrap;gap:.4rem}
 .mtag{padding:.35rem .8rem;border-radius:8px;font-size:.8rem;font-weight:600;color:var(--text-body);background:var(--bg-white);border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:all .25s}.mtag:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-bg)}
+/* Supervision */
 .sv-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:12px;padding:1.4rem;box-shadow:var(--shadow-sm)}
 .sv-card h4{font-size:.95rem;font-weight:700;color:var(--text-primary);margin-bottom:.2rem}.sv-card p{font-size:.84rem;color:var(--text-body);line-height:1.6}
+/* Contact */
 .cs{text-align:center}.cs .section-title{margin-bottom:.7rem}
 .cs-sub{color:var(--text-secondary);font-size:.95rem;margin-bottom:1.8rem;max-width:480px;margin-left:auto;margin-right:auto}
 .cl{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
@@ -128,9 +137,9 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
   <div class="hero-deco one"></div><div class="hero-deco two"></div>
   <div class="hero-grid">
     <div>
-      <div class="hero-tag"><span class="dot"></span> PhD Researcher -- GIS, Remote Sensing & Climate Science</div>
+      <div class="hero-tag"><span class="dot"></span> PhD Researcher — Climate Science</div>
       <h1>Stephen<br><span class="accent">Nyaranga</span></h1>
-      <p class="hero-desc">Climate scientist and geophysicist pursuing a PhD in Geospatial Information Systems and Remote Sensing at JKUAT, harnessing deep learning and multi-sensor Earth observation to map flood risks in Rwanda's mountainous cities.</p>
+      <p class="hero-desc">Climate scientist and geophysicist harnessing deep learning and multi-sensor Earth observation to map flood risks in Rwanda's mountainous cities. Bridging physics, data science, and real-world impact.</p>
       <div class="hero-actions">
         <a href="Stephen_Nyaranga_CV.pdf" download class="btn btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV</a>
         <a href="#projects" class="btn btn-outline">View Projects</a>
@@ -146,21 +155,18 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
   </div>
 </section>
 
-<div class="carousel-section">
 <div class="carousel-track" id="carouselTrack">
     <img src="images/ghana.jpg" alt="Ghana" class="carousel-img" style="width:280px">
     <img src="images/cameroon.jpg" alt="Cameroon" class="carousel-img" style="width:280px">
     <img src="images/kigali.jpg" alt="Kigali" class="carousel-img" style="width:280px">
     <img src="images/senegal.jpg" alt="Senegal" class="carousel-img" style="width:280px">
     <img src="images/teaching.jpg" alt="Teaching" class="carousel-img" style="width:280px">
-    <img src="images/aims_ric.jpg" alt="AIMS-RIC" class="carousel-img" style="width:280px">
+    <!-- Duplicate the same set below for seamless looping -->
     <img src="images/ghana.jpg" alt="Ghana" class="carousel-img" style="width:280px">
     <img src="images/cameroon.jpg" alt="Cameroon" class="carousel-img" style="width:280px">
     <img src="images/kigali.jpg" alt="Kigali" class="carousel-img" style="width:280px">
     <img src="images/senegal.jpg" alt="Senegal" class="carousel-img" style="width:280px">
     <img src="images/teaching.jpg" alt="Teaching" class="carousel-img" style="width:280px">
-    <img src="images/aims_ric.jpg" alt="AIMS-RIC" class="carousel-img" style="width:280px">
-</div>
 </div>
 
 <section id="about">
@@ -169,7 +175,7 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-title reveal">A diligent scientist driven by curiosity and real-world impact</div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I am a Kenyan-born climate scientist and geophysicist pursuing a <strong>PhD in Geospatial Information Systems and Remote Sensing</strong> at <strong>JKUAT</strong> (host university), on the CLARITY-Africa Doctoral Programme jointly affiliated with <strong>AIMS-RIC</strong> (Kigali) and <strong>Imperial College London</strong>. My research integrates deep learning and SAR analysis for flood mapping and urban resilience in Rwanda.</p>
+        <p>I am a Kenyan-born climate scientist and geophysicist pursuing my PhD on the CLARITY-Africa Doctoral Programme, jointly affiliated with <strong>AIMS-RIC</strong> (Kigali), <strong>JKUAT</strong> (Department of Geomatic Engineering and Geospatial Information Systems, host university), and <strong>Imperial College London</strong>.</p>
         <p>My academic journey spans four countries. I hold a BSc with First Class Honours from Karatina University, an MSc with Distinction from AIMS-Senegal, and pursued an MSc in Geophysics at ICTP-EAIFR.</p>
         <p>I am a member of the <a href="https://axiomresearchs.org" target="_blank">AXIOM Research Group</a> at AIMS-RIC (for which I built the website), and have hands-on experience in IT leadership, web development, teaching, and digital transformation.</p>
       </div>
@@ -189,11 +195,11 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Education</div>
     <div class="section-title reveal">Academic Journey</div>
     <div class="timeline">
-      <div class="tl reveal"><div class="tl-date">Oct 2025 -- Present</div><h3>PhD in Geospatial Information Systems and Remote Sensing</h3><div class="tl-inst">Host University: JKUAT (Dept. of Geomatic Engineering & GIS) | AIMS-RIC, Kigali | Imperial College London</div><p class="tl-det">CLARITY-Africa Doctoral Programme. Integrating Deep Learning and SAR Analysis for Flood Extent Mapping, Depth Estimation, and Urban Resilience in Musanze and Kigali, Rwanda.</p><p class="tl-sup"><strong>Supervisors:</strong> Prof. Dr. Mouhamadou Bamba Sylla (AIMS-RIC, Main Supervisor), Dr. Ben Howard (Imperial College London, Co-supervisor), Prof. Dr. Wouter Buytaert (Imperial College London, Co-supervisor), Dr. Mercy Mwaniki (JKUAT, Host Supervisor)</p></div>
-      <div class="tl reveal"><div class="tl-date">Jan 2023 -- Dec 2024</div><h3>Pursued MSc in Geophysics</h3><div class="tl-inst">ICTP-EAIFR, University of Rwanda, Kigali</div><p class="tl-det">Seismology, geodesy, InSAR, computational geodynamics, earthquake mechanics, atmospheric physics, GPS geodesy, volcanology.</p><div class="tl-dis"><strong>Thesis:</strong> Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020--2024 Sentinel-1 InSAR Survey.</div></div>
-      <div class="tl reveal"><div class="tl-date">Oct 2021 -- Jul 2022</div><h3>MSc Mathematical Sciences -- Climate/Data Science</h3><div class="tl-inst">AIMS-Senegal, Mbour</div><p class="tl-det">ML, AI, climate dynamics, quantum mechanics & computing, statistical learning. Mastercard Foundation Scholar.</p><div class="tl-dis"><strong>Dissertation:</strong> Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998.</div><span class="tl-badge bd">Graduated with Distinction</span></div>
-      <div class="tl reveal"><div class="tl-date">Aug 2016 -- Mar 2021</div><h3>BSc Education Science (Physics/Mathematics)</h3><div class="tl-inst">Karatina University, Nyeri, Kenya</div><span class="tl-badge bh">First Class Honours</span></div>
-      <div class="tl reveal"><div class="tl-date">2012 -- 2015</div><h3>Secondary Education</h3><div class="tl-inst">Kobos Boys High School, Trans-Nzoia, Kenya</div><div class="tl-acts"><span class="tl-act">Student Rep</span><span class="tl-act">Librarian</span><span class="tl-act">Science Congress</span><span class="tl-act">Music Festivals</span></div></div>
+      <div class="tl reveal"><div class="tl-date">Oct 2025 — Present</div><h3>PhD in Climate Change Science</h3><div class="tl-inst">AIMS-RIC / JKUAT (Dept. of Geomatic Engineering & GIS) / Imperial College London</div><p class="tl-det">CLARITY-Africa Doctoral Programme. Integrating Deep Learning and SAR Analysis for Flood Extent Mapping, Depth Estimation, and Urban Resilience in Musanze and Kigali, Rwanda.</p></div>
+      <div class="tl reveal"><div class="tl-date">Jan 2023 — Dec 2024</div><h3>Pursued MSc in Geophysics</h3><div class="tl-inst">ICTP-EAIFR, University of Rwanda, Kigali</div><p class="tl-det">Seismology, geodesy, InSAR, computational geodynamics, earthquake mechanics, atmospheric physics, GPS geodesy, volcanology.</p><div class="tl-dis"><strong>Thesis:</strong> Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya: Insights From a 2020–2024 Sentinel-1 InSAR Survey.</div></div>
+      <div class="tl reveal"><div class="tl-date">Oct 2021 — Jul 2022</div><h3>MSc Mathematical Sciences — Climate/Data Science</h3><div class="tl-inst">AIMS-Senegal, Mbour</div><p class="tl-det">ML, AI, climate dynamics, quantum mechanics & computing, statistical learning. Mastercard Foundation Scholar.</p><div class="tl-dis"><strong>Dissertation:</strong> Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998.</div><span class="tl-badge bd">Graduated with Distinction</span></div>
+      <div class="tl reveal"><div class="tl-date">Aug 2016 — Mar 2021</div><h3>BSc Education Science (Physics/Mathematics)</h3><div class="tl-inst">Karatina University, Nyeri, Kenya</div><span class="tl-badge bh">First Class Honours</span></div>
+      <div class="tl reveal"><div class="tl-date">2012 — 2015</div><h3>Secondary Education</h3><div class="tl-inst">Kobos Boys High School, Trans-Nzoia, Kenya</div><div class="tl-acts"><span class="tl-act">Student Rep</span><span class="tl-act">Librarian</span><span class="tl-act">Science Congress</span><span class="tl-act">Music Festivals</span></div></div>
       <div class="tl reveal"><div class="tl-date">Primary</div><h3>Lelkina Primary School</h3><div class="tl-inst">Kapomboi Ward, Kenya</div><span class="tl-badge bf">Passed with Flying Colours</span></div>
     </div>
   </div>
@@ -204,69 +210,75 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Professional Experience</div>
     <div class="section-title reveal">Where I've Contributed</div>
     <div class="eg">
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Assistant Lecturer <span class="ec-type">Part-Time</span></div><div class="ec-co">Vatel Rwanda -- Kigali</div></div><div class="ec-date">Jun 2025 -- Oct 2025</div></div><p class="ec-d">Appointed Assistant Lecturer for 2025--2026. Delivered ICDL to lecturers, staff, and students. Led IT Dept. AI integration in curriculum.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Head of IT Department <span class="ec-type">Full-Time</span></div><div class="ec-co">Vatel Rwanda -- Kigali</div></div><div class="ec-date">Jul 2024 -- Oct 2025</div></div><p class="ec-d">Canvas/Moodle/Triade LMS. Built in-house tracking platforms. IT training for all staff and students.</p><button class="vm" onclick="toggleExpand(this)">View more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="expd"><p class="ec-d" style="margin-top:.4rem">Scheduling systems, IT support/troubleshooting, software development, hardware/software inventory, internet monitoring, security, ICDL compliance, Grammarly/OneDrive/SharePoint oversight.</p></div></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">IT Associate -- MCF Program <span class="ec-type">Internship</span></div><div class="ec-co">Vatel Rwanda -- Kigali</div></div><div class="ec-date">Jul 2023 -- Jul 2024</div></div><p class="ec-d">AI tools in teaching. Canvas migration. Training on AI, ICDL, digital literacy. IT systems management.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Physics & Mathematics Teacher</div><div class="ec-co">Kathiani Boy's HS -- Machakos, Kenya</div></div><div class="ec-date">May -- Oct 2021</div></div><p class="ec-d">Taught Physics and Mathematics. Lesson prep, student assessment.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Physics & Mathematics Teacher</div><div class="ec-co">Ntanki SS -- Meru, Kenya</div></div><div class="ec-date">Jan -- Apr 2021</div></div><p class="ec-d">Prepared lessons and materials for Mathematics and Physics.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Undergrad Teaching & Practice</div><div class="ec-co">Kobos SS, Lessos SS, Handege SS, Mururia Boys HS -- Kenya</div></div><div class="ec-date">2016 -- 2019</div></div><p class="ec-d">Taught Physics and Mathematics across four schools in Trans-Nzoia and Kiambu counties.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Programming Trainer <span class="ec-type">Volunteer</span></div><div class="ec-co">Totosci Academy, Don Bosco -- Karen, Nairobi</div></div><div class="ec-date">Feb--Mar 2019</div></div><p class="ec-d">Trained needy children in computer programming at Don Bosco centre.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Election Clerk Officer <span class="ec-type">IEBC</span></div><div class="ec-co">IEBC -- Trans-Nzoia, Kenya</div></div><div class="ec-date">Aug 2017</div></div><p class="ec-d">Served as clerk officer at Gidea Primary School polling station, Kenya 2017 general election.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Assistant Lecturer <span class="ec-type">Part-Time</span></div><div class="ec-co">Vatel Rwanda — Kigali</div></div><div class="ec-date">Jun 2025 — Oct 2025</div></div><p class="ec-d">Appointed Assistant Lecturer for 2025–2026. Delivered ICDL to lecturers, staff, and students. Led IT Dept. AI integration in curriculum.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Head of IT Department <span class="ec-type">Full-Time</span></div><div class="ec-co">Vatel Rwanda — Kigali</div></div><div class="ec-date">Jul 2024 — Oct 2025</div></div><p class="ec-d">Canvas/Moodle/Triade LMS. Built in-house tracking platforms. IT training for all staff and students.</p><button class="vm" onclick="toggleExpand(this)">View more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="expd"><p class="ec-d" style="margin-top:.4rem">Scheduling systems, IT support/troubleshooting, software development, hardware/software inventory, internet monitoring, security, ICDL compliance, Grammarly/OneDrive/SharePoint oversight.</p></div></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">IT Associate — MCF Program <span class="ec-type">Internship</span></div><div class="ec-co">Vatel Rwanda — Kigali</div></div><div class="ec-date">Jul 2023 — Jul 2024</div></div><p class="ec-d">AI tools in teaching. Canvas migration. Training on AI, ICDL, digital literacy. IT systems management.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Physics & Mathematics Teacher</div><div class="ec-co">Kathiani Boy's HS — Machakos, Kenya</div></div><div class="ec-date">May — Oct 2021</div></div><p class="ec-d">Taught Physics and Mathematics. Lesson prep, student assessment.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Physics & Mathematics Teacher</div><div class="ec-co">Ntanki SS — Meru, Kenya</div></div><div class="ec-date">Jan — Apr 2021</div></div><p class="ec-d">Prepared lessons and materials for Mathematics and Physics.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Undergrad Teaching & Practice</div><div class="ec-co">Kobos SS, Lessos SS, Handege SS, Mururia Boys HS — Kenya</div></div><div class="ec-date">2016 — 2019</div></div><p class="ec-d">Taught Physics and Mathematics across four schools in Trans-Nzoia and Kiambu counties.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Programming Trainer <span class="ec-type">Volunteer</span></div><div class="ec-co">Totosci Academy, Don Bosco — Karen, Nairobi</div></div><div class="ec-date">Feb–Mar 2019</div></div><p class="ec-d">Trained needy children in computer programming at Don Bosco centre.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Election Clerk Officer <span class="ec-type">IEBC</span></div><div class="ec-co">IEBC — Trans-Nzoia, Kenya</div></div><div class="ec-date">Aug 2017</div></div><p class="ec-d">Served as clerk officer at Gidea Primary School polling station, Kenya 2017 general election.</p></div>
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects" class="section-alt">
   <div class="section-inner">
     <div class="section-label reveal">// Projects & Demos</div>
     <div class="section-title reveal">Built & Shipped</div>
     <div class="proj-grid">
+
       <div class="proj-card reveal">
         <iframe src="https://tembeaafrica.github.io/" class="proj-preview" loading="lazy" title="TembeaAfrica"></iframe>
         <div class="proj-body">
-          <span class="proj-tag tc">AI . Travel . Award-Winning</span>
+          <span class="proj-tag tc">AI · Travel · Award-Winning</span>
           <h3>TembeaAfrica AI</h3>
           <p>AI-powered multi-lingual travel assistant for Africa. Won Best Project Award at AIMS-RIC Doctoral Training School 2026.</p>
           <a href="https://tembeaafrica.github.io/" target="_blank" class="proj-link">Open App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
         </div>
       </div>
+
       <div class="proj-card reveal">
         <iframe src="https://seis-ews-five.vercel.app/" class="proj-preview" loading="lazy" title="Seismic EWS"></iframe>
         <div class="proj-body">
-          <span class="proj-tag td">Geodesy . Seismology</span>
+          <span class="proj-tag td">Geodesy · Seismology</span>
           <h3>Seismic Early Warning App</h3>
           <p>Built during the Geodesy for a Resilient Africa Summer School in Cameroon (Jun-Jul 2026). Seismic data visualization and alerting.</p>
           <a href="https://seis-ews-five.vercel.app/" target="_blank" class="proj-link">Open App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
         </div>
       </div>
+
       <div class="proj-card reveal">
-        <iframe src="https://globalfellowsprogram.netlify.app/" class="proj-preview" loading="lazy" title="Global Fellows Programme"></iframe>
+        <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#134e7a,#2a83c4);color:#fff;font-size:1.1rem;font-weight:700;text-align:center;padding:1rem">HeatAlert Accra<br><span style="font-size:.8rem;font-weight:400;opacity:.8">Early Warning Dashboard</span></div>
         <div class="proj-body">
-          <span class="proj-tag tc">Climate . LSTM . Award-Winning</span>
-          <h3>HeatAlert Accra -- SolarCool CoolTree</h3>
+          <span class="proj-tag tc">Climate · LSTM · Award-Winning</span>
+          <h3>HeatAlert Accra — SolarCool CoolTree</h3>
           <p>Team PUM-CLID. LSTM-based WBGT heat forecast + CoolShade (solar PV PCM shelter) + CoolBand (elastocaloric wearable). Best Innovative Accelerator, Imperial-AIMS Global Fellows 2026.</p>
-          <a href="https://globalfellowsprogram.netlify.app/" target="_blank" class="proj-link">Project Site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
-          <a href="https://aims-ric-pumclid.hf.space/" target="_blank" class="proj-link">Live Dashboard <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
         </div>
       </div>
+
       <div class="proj-card reveal">
         <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b5702a,#d4923c);color:#fff;font-size:1.1rem;font-weight:700;text-align:center;padding:1rem">Item Detection<br><span style="font-size:.8rem;font-weight:400;opacity:.8">High School STEM Demo</span></div>
         <div class="proj-body">
-          <span class="proj-tag td">Computer Vision . Education</span>
+          <span class="proj-tag td">Computer Vision · Education</span>
           <h3>Object Detection Demo for High Schools</h3>
-          <p>Real-time item detection system developed as an educational STEM outreach demo for secondary school students. Developed and demonstrated via Google Colab.</p>
+          <p>Real-time item detection system developed as an educational STEM outreach demo for secondary school students.</p>
         </div>
       </div>
+
       <div class="proj-card reveal">
         <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1b6ca8,#3a9fd4);color:#fff;font-size:1.1rem;font-weight:700;text-align:center;padding:1rem">AXIOM Research<br><span style="font-size:.8rem;font-weight:400;opacity:.8">axiomresearchs.org</span></div>
         <div class="proj-body">
-          <span class="proj-tag tc">Web Dev . Organization</span>
+          <span class="proj-tag tc">Web Dev · Organization</span>
           <h3>AXIOM Research Group Website</h3>
           <p>Designed and built the website for the AXIOM Research Group at AIMS-RIC.</p>
           <a href="https://axiomresearchs.org" target="_blank" class="proj-link">Visit Site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
         </div>
       </div>
+
     </div>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:var(--text-muted)" class="reveal">To embed a video: add <code>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" ...&gt;</code> in place of a preview div above.</p>
   </div>
 </section>
 
@@ -274,18 +286,19 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
   <div class="section-inner">
     <div class="section-label reveal">// Research</div>
     <div class="section-title reveal">Current & Past Work</div>
-    <div class="rc reveal"><span class="rc-tag tc">Current . PhD</span><h3>Integrating Deep Learning and SAR Analysis for Flood Extent Mapping, Depth Estimation, and Urban Resilience in Musanze and Kigali, Rwanda</h3><div class="rc-meta">JKUAT / AIMS-RIC / Imperial College London . Oct 2025 -- Present</div><p class="rc-desc">PhD in Geospatial Information Systems and Remote Sensing. Multi-sensor deep learning framework combining SAR time-series, optical EO, and terrain metrics. CLARITY-Africa Doctoral Programme.</p><p class="tl-sup" style="margin-top:.5rem"><strong>Supervisors:</strong> Prof. Dr. M. B. Sylla (Main), Dr. B. Howard & Prof. Dr. W. Buytaert (Co-supervisors, ICL), Dr. M. Mwaniki (Host, JKUAT)</p></div>
-    <div class="rc reveal"><span class="rc-tag td">Completed . MSc Geophysics</span><h3>Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya</h3><div class="rc-meta">ICTP-EAIFR . 2023--2024</div><p class="rc-desc">Sentinel-1 InSAR time-series analysis of ground deformation at Kenya's Olkaria geothermal field (2020--2024).</p></div>
-    <div class="rc reveal"><span class="rc-tag td">Completed . MSc AIMS-Senegal</span><h3>Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998</h3><div class="rc-meta">AIMS-Senegal . 2021--2022</div><p class="rc-desc">Atmospheric rivers driving surface melting in West Antarctica. Mastercard Foundation Scholar.</p><a href="https://drive.google.com/drive/folders/1EChAvIUcMb2n6QWsJx3RQjyseSVFw1y9" target="_blank" rel="noopener" class="rc-link">View Thesis <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a></div>
+    <div class="rc reveal"><span class="rc-tag tc">Current · PhD</span><h3>Integrating Deep Learning and SAR Analysis for Flood Extent Mapping, Depth Estimation, and Urban Resilience in Musanze and Kigali, Rwanda</h3><div class="rc-meta">AIMS-RIC / JKUAT / Imperial College London · Oct 2025 – Present</div><p class="rc-desc">Multi-sensor deep learning framework combining SAR time-series, optical EO, and terrain metrics. CLARITY-Africa Doctoral Programme.</p></div>
+    <div class="rc reveal"><span class="rc-tag td">Completed · MSc Geophysics</span><h3>Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya</h3><div class="rc-meta">ICTP-EAIFR · 2023–2024</div><p class="rc-desc">Sentinel-1 InSAR time-series analysis of ground deformation at Kenya's Olkaria geothermal field (2020–2024).</p></div>
+    <div class="rc reveal"><span class="rc-tag td">Completed · MSc AIMS-Senegal</span><h3>Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998</h3><div class="rc-meta">AIMS-Senegal · 2021–2022</div><p class="rc-desc">Atmospheric rivers driving surface melting in West Antarctica. Mastercard Foundation Scholar.</p><a href="https://drive.google.com/drive/folders/1EChAvIUcMb2n6QWsJx3RQjyseSVFw1y9" target="_blank" rel="noopener" class="rc-link">View Thesis <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a></div>
   </div>
 </section>
 
+<!-- Supervision -->
 <section class="section-alt">
   <div class="section-inner">
     <div class="section-label reveal">// Supervision</div>
     <div class="section-title reveal">Graduate Supervision</div>
     <div class="sv-card reveal">
-      <h4>Co-supervisor -- AIMS Rwanda (2026)</h4>
+      <h4>Co-supervisor — AIMS Rwanda (2026)</h4>
       <p><strong>Richard Usengimana</strong></p>
       <p>Spatial Analysis of Child Malnutrition in Rwanda: District-Level Integration of DHS Data and Agro-Climatic Indicators</p>
       <p style="color:var(--text-muted);font-size:.8rem;margin-top:.3rem">Primary supervisor: Dr. Lema Seknewna (AIMS-RIC)</p>
@@ -313,12 +326,12 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Leadership & Service</div>
     <div class="section-title reveal">Beyond the Classroom</div>
     <div class="lg">
-      <div class="lc reveal"><div class="icon">🔬</div><h4>AXIOM Research Group</h4><div class="org">AIMS-RIC . Current</div><p>Member; built the organization's website.</p></div>
-      <div class="lc reveal"><div class="icon">🗳️</div><h4>Chairman, Electoral Commission</h4><div class="org">Karatina University . 2019/2020</div><p>Planned and coordinated general student elections.</p></div>
-      <div class="lc reveal"><div class="icon">📣</div><h4>Class Rep (4 years)</h4><div class="org">Karatina University . 2016--2020</div><p>Represented Education Science students. Electoral college member.</p></div>
-      <div class="lc reveal"><div class="icon">🤝</div><h4>Peer Counsellor</h4><div class="org">Karatina University . 2017--2020</div><p>Guidance and emotional support for fellow students.</p></div>
-      <div class="lc reveal"><div class="icon">⛪</div><h4>Treasurer, Christian Union</h4><div class="org">Karatina University . 2017--2018</div><p>Managed finances for the ushering department.</p></div>
-      <div class="lc reveal"><div class="icon">💻</div><h4>Programming Trainer</h4><div class="org">Don Bosco, Karen . 2019</div><p>Volunteered to teach coding to underprivileged children.</p></div>
+      <div class="lc reveal"><div class="icon">🔬</div><h4>AXIOM Research Group</h4><div class="org">AIMS-RIC · Current</div><p>Member; built the organization's website.</p></div>
+      <div class="lc reveal"><div class="icon">🗳️</div><h4>Chairman, Electoral Commission</h4><div class="org">Karatina University · 2019/2020</div><p>Planned and coordinated general student elections.</p></div>
+      <div class="lc reveal"><div class="icon">📣</div><h4>Class Rep (4 years)</h4><div class="org">Karatina University · 2016–2020</div><p>Represented Education Science students. Electoral college member.</p></div>
+      <div class="lc reveal"><div class="icon">🤝</div><h4>Peer Counsellor</h4><div class="org">Karatina University · 2017–2020</div><p>Guidance and emotional support for fellow students.</p></div>
+      <div class="lc reveal"><div class="icon">⛪</div><h4>Treasurer, Christian Union</h4><div class="org">Karatina University · 2017–2018</div><p>Managed finances for the ushering department.</p></div>
+      <div class="lc reveal"><div class="icon">💻</div><h4>Programming Trainer</h4><div class="org">Don Bosco, Karen · 2019</div><p>Volunteered to teach coding to underprivileged children.</p></div>
     </div>
   </div>
 </section>
@@ -328,13 +341,13 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Awards & Honours</div>
     <div class="section-title reveal">Recognition</div>
     <div class="al">
-      <div class="ai reveal"><div class="ai-icon">🏆</div><div><h4>Best Innovative Accelerator Project (Team PUM-CLID)</h4><p>Imperial-AIMS Global Fellows, Accra . Jun 2026</p></div></div>
-      <div class="ai reveal"><div class="ai-icon">🏆</div><div><h4>Best Project Award -- TembeaAfrica AI</h4><p>AIMS-RIC Doctoral Training School . 2026</p></div></div>
-      <div class="ai reveal"><div class="ai-icon">📜</div><div><h4>Intro Linux & GMT Micro-Credential</h4><p>EarthScope / Miami University Geology (SSBW) . Jun 2026</p></div></div>
-      <div class="ai reveal"><div class="ai-icon">🏆</div><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Competition . Jul 2024</p></div></div>
-      <div class="ai reveal"><div class="ai-icon">🎓</div><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship, MSc at AIMS-Senegal . 2021--2022</p></div></div>
-      <div class="ai reveal"><div class="ai-icon">📜</div><div><h4>NASA ARSET Certificate</h4><p>Fundamentals of Remote Sensing . Oct 2025</p></div></div>
-      <div class="ai reveal"><div class="ai-icon">💼</div><div><h4>Techstars Startup Weekend</h4><p>Business participant, Dedan Kimathi University . Sep 2019</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">🏆</div><div><h4>Best Innovative Accelerator Project (Team PUM-CLID)</h4><p>Imperial-AIMS Global Fellows, Accra · Jun 2026</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">🏆</div><div><h4>Best Project Award — TembeaAfrica AI</h4><p>AIMS-RIC Doctoral Training School · 2026</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">📜</div><div><h4>Intro Linux & GMT Micro-Credential</h4><p>EarthScope / Miami University Geology (SSBW) · Jun 2026</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">🏆</div><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Competition · Jul 2024</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">🎓</div><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship, MSc at AIMS-Senegal · 2021–2022</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">📜</div><div><h4>NASA ARSET Certificate</h4><p>Fundamentals of Remote Sensing · Oct 2025</p></div></div>
+      <div class="ai reveal"><div class="ai-icon">💼</div><div><h4>Techstars Startup Weekend</h4><p>Business participant, Dedan Kimathi University · Sep 2019</p></div></div>
     </div>
   </div>
 </section>
@@ -344,12 +357,12 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Conferences & Training</div>
     <div class="section-title reveal">Continuous Learning</div>
     <div class="eg">
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Geodesy for a Resilient Africa Summer School</div></div><div class="ec-date">Jun--Jul 2026</div></div><p class="ec-d">AIMS-Cameroon, Limbe. Geodetic methods and applications in geoscience.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Imperial-AIMS Global Fellows Programme -- Accra</div></div><div class="ec-date">Jun 2026</div></div><p class="ec-d">Team Lead (PUM-CLID). LSTM heat forecast + CoolShade + CoolBand. Best Innovative Accelerator.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">EarthScope InSAR Processing (GMTSAR) + Seismology SBW</div></div><div class="ec-date">Jun--Aug 2026</div></div><p class="ec-d">Selected from 300+ applicants for InSAR course. 70-hour SSBW in scientific computing with seismic data.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">AIMS-RIC Training School: Data Science Methods</div></div><div class="ec-date">Mar--Apr 2026</div></div><p class="ec-d">Oral presentation on SAR-Based Flood Mapping and Land-Cover Classification in Rwanda.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Geodesy for a Resilient Africa Summer School</div></div><div class="ec-date">Jun–Jul 2026</div></div><p class="ec-d">AIMS-Cameroon, Limbe. Geodetic methods and applications in geoscience.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Imperial-AIMS Global Fellows Programme — Accra</div></div><div class="ec-date">Jun 2026</div></div><p class="ec-d">Team Lead (PUM-CLID). LSTM heat forecast + CoolShade + CoolBand. Best Innovative Accelerator.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">EarthScope InSAR Processing (GMTSAR) + Seismology SBW</div></div><div class="ec-date">Jun–Aug 2026</div></div><p class="ec-d">Selected from 300+ applicants for InSAR course. 70-hour SSBW in scientific computing with seismic data.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">AIMS-RIC Training School: Data Science Methods</div></div><div class="ec-date">Mar–Apr 2026</div></div><p class="ec-d">Oral presentation on SAR-Based Flood Mapping and Land-Cover Classification in Rwanda.</p></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">NASA ARSET: Fundamentals of Remote Sensing</div></div><div class="ec-date">Oct 2025</div></div><p class="ec-d">NASA Applied Remote Sensing Training Programme. Certificate awarded.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Rwanda MoE Data Workshop . ICTP-EAIFR-IUGG . ASESMA . Jobberman . ASP . ICTP-IAEA</div></div><div class="ec-date">2021--2024</div></div><p class="ec-d">Data analysis, computational geodynamics, electronic structure methods, business writing, physics, nuclear KM.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Rwanda MoE Data Workshop · ICTP-EAIFR-IUGG · ASESMA · Jobberman · ASP · ICTP-IAEA</div></div><div class="ec-date">2021–2024</div></div><p class="ec-d">Data analysis, computational geodynamics, electronic structure methods, business writing, physics, nuclear KM.</p></div>
     </div>
   </div>
 </section>
@@ -359,8 +372,8 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Memberships</div>
     <div class="section-title reveal">Professional Affiliations</div>
     <div class="mt reveal">
-      <span class="mtag">AXIOM Research Group -- AIMS-RIC</span>
-      <span class="mtag">Teachers Service Commission (TSC) -- Kenya</span>
+      <span class="mtag">AXIOM Research Group — AIMS-RIC</span>
+      <span class="mtag">Teachers Service Commission (TSC) — Kenya</span>
       <span class="mtag">African School of Fundamental Physics (ASP)</span>
       <span class="mtag">ASFAP</span>
       <span class="mtag">Karatina University Alumni</span>
