@@ -105,6 +105,11 @@ section{padding:5rem 3rem}.section-inner{max-width:1100px;margin:0 auto}
 .cc{display:flex;align-items:center;gap:.5rem;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;padding:.7rem 1.1rem;text-decoration:none;color:var(--text-primary);transition:all .3s;box-shadow:var(--shadow-sm)}.cc:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .cc .ci{font-size:1rem}.cc .cl-l{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}.cc .cl-v{font-size:.8rem;font-weight:600}
 footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--text-muted);background:rgba(255,255,255,0.4)}footer b{color:var(--accent);font-weight:700}
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-top:1rem}
+.ph-grid figure{margin:0;background:var(--bg-white);border:1px solid var(--border-light);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.ph-grid img{width:100%;height:220px;object-fit:cover;display:block}
+.ph-grid figcaption{font-size:.76rem;color:var(--text-secondary);padding:.5rem .7rem;line-height:1.45}
+.ec-up{display:inline-block;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--accent);border-radius:20px;padding:.1rem .5rem;margin-left:.4rem;vertical-align:middle}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.reveal.visible{opacity:1;transform:translateY(0)}
@@ -154,12 +159,16 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <img src="images/senegal.jpg" alt="Senegal" class="carousel-img" style="width:280px">
     <img src="images/teaching.jpg" alt="Teaching" class="carousel-img" style="width:280px">
     <img src="images/aims_ric.jpg" alt="AIMS-RIC" class="carousel-img" style="width:280px">
+    <img src="images/activities/field-visit-team-river-may2026.jpg" alt="Field visit with the research team beside a river, May 2026" class="carousel-img" style="width:280px">
+    <img src="images/activities/university-of-ghana-jun2026.jpg" alt="Stephen at the University of Ghana, Accra, June 2026" class="carousel-img" style="width:280px">
     <img src="images/ghana.jpg" alt="Ghana" class="carousel-img" style="width:280px">
     <img src="images/cameroon.jpg" alt="Cameroon" class="carousel-img" style="width:280px">
     <img src="images/kigali.jpg" alt="Kigali" class="carousel-img" style="width:280px">
     <img src="images/senegal.jpg" alt="Senegal" class="carousel-img" style="width:280px">
     <img src="images/teaching.jpg" alt="Teaching" class="carousel-img" style="width:280px">
     <img src="images/aims_ric.jpg" alt="AIMS-RIC" class="carousel-img" style="width:280px">
+    <img src="images/activities/field-visit-team-river-may2026.jpg" alt="Field visit with the research team beside a river, May 2026" class="carousel-img" style="width:280px">
+    <img src="images/activities/university-of-ghana-jun2026.jpg" alt="Stephen at the University of Ghana, Accra, June 2026" class="carousel-img" style="width:280px">
 </div>
 </div>
 
@@ -204,6 +213,7 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Professional Experience</div>
     <div class="section-title reveal">Where I've Contributed</div>
     <div class="eg">
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Teaching Assistant <span class="ec-up">Upcoming</span></div><div class="ec-co">EASY-ML School -- University of Nairobi, Chiromo Campus</div></div><div class="ec-date">13--27 Jan 2027</div></div><p class="ec-d">I will be a teaching assistant at the East-African School for Young Researchers on Advanced Machine Learning Techniques, supporting participants during the hands-on sessions. <a href="https://indico.in2p3.fr/event/40435/page/5146-lecturers-and-teaching-assistants" target="_blank" rel="noopener">Lecturers and teaching assistants</a></p></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Assistant Lecturer <span class="ec-type">Part-Time</span></div><div class="ec-co">Vatel Rwanda -- Kigali</div></div><div class="ec-date">Jun 2025 -- Oct 2025</div></div><p class="ec-d">Appointed Assistant Lecturer for 2025--2026. Delivered ICDL to lecturers, staff, and students. Led IT Dept. AI integration in curriculum.</p></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Head of IT Department <span class="ec-type">Full-Time</span></div><div class="ec-co">Vatel Rwanda -- Kigali</div></div><div class="ec-date">Jul 2024 -- Oct 2025</div></div><p class="ec-d">Canvas/Moodle/Triade LMS. Built in-house tracking platforms. IT training for all staff and students.</p><button class="vm" onclick="toggleExpand(this)">View more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="expd"><p class="ec-d" style="margin-top:.4rem">Scheduling systems, IT support/troubleshooting, software development, hardware/software inventory, internet monitoring, security, ICDL compliance, Grammarly/OneDrive/SharePoint oversight.</p></div></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">IT Associate -- MCF Program <span class="ec-type">Internship</span></div><div class="ec-co">Vatel Rwanda -- Kigali</div></div><div class="ec-date">Jul 2023 -- Jul 2024</div></div><p class="ec-d">AI tools in teaching. Canvas migration. Training on AI, ICDL, digital literacy. IT systems management.</p></div>
@@ -275,6 +285,14 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
     <div class="section-label reveal">// Research</div>
     <div class="section-title reveal">Current & Past Work</div>
     <div class="rc reveal"><span class="rc-tag tc">Current . PhD</span><h3>Integrating Deep Learning and SAR Analysis for Flood Extent Mapping, Depth Estimation, and Urban Resilience in Musanze and Kigali, Rwanda</h3><div class="rc-meta">JKUAT / AIMS-RIC / Imperial College London . Oct 2025 -- Present</div><p class="rc-desc">PhD in Geospatial Information Systems and Remote Sensing. Multi-sensor deep learning framework combining SAR time-series, optical EO, and terrain metrics. CLARITY-Africa Doctoral Programme.</p><p class="tl-sup" style="margin-top:.5rem"><strong>Supervisors:</strong> Prof. Dr. M. B. Sylla (Main), Dr. B. Howard & Prof. Dr. W. Buytaert (Co-supervisors, ICL), Dr. M. Mwaniki (Host, JKUAT)</p></div>
+    <div class="rc reveal"><span class="rc-tag tc">Current . Fieldwork</span><h3>Field Campaign for Flood Validation Data</h3><div class="rc-meta">Rwanda . Apr--May 2026</div><p class="rc-desc">Satellite flood maps need ground truth. In April and May 2026 I worked with the team to record flood marks on buildings, set up measurement equipment and install sensors at river crossings. These observations will be used to validate the Sentinel-1 flood extents and to calibrate flood-depth estimates in my PhD work.</p>
+      <div class="ph-grid">
+        <figure><img src="images/activities/fieldwork-flood-mark-survey-apr2026.jpg" alt="Marking a flood level on a brick wall during fieldwork" loading="lazy"><figcaption>Recording a flood mark, Apr 2026</figcaption></figure>
+        <figure><img src="images/activities/fieldwork-equipment-setup-apr2026.jpg" alt="Unpacking survey equipment beside a field vehicle" loading="lazy"><figcaption>Preparing equipment, Apr 2026</figcaption></figure>
+        <figure><img src="images/activities/fieldwork-bridge-sensor-may2026.jpg" alt="Installing a sensor housing under a bridge using a ladder" loading="lazy"><figcaption>Sensor installation at a bridge, May 2026</figcaption></figure>
+        <figure><img src="images/activities/fieldwork-flood-level-measurement-may2026.jpg" alt="Measuring a flood level against a house wall with a measuring staff" loading="lazy"><figcaption>Flood-level measurement, May 2026</figcaption></figure>
+        <figure><img src="images/activities/field-visit-team-river-may2026.jpg" alt="Research team standing beside a river during a site visit" loading="lazy"><figcaption>Site visit with collaborators, May 2026</figcaption></figure>
+      </div></div>
     <div class="rc reveal"><span class="rc-tag td">Completed . MSc Geophysics</span><h3>Time Series InSAR Analysis over the Olkaria Geothermal Power Plant in Kenya</h3><div class="rc-meta">ICTP-EAIFR . 2023--2024</div><p class="rc-desc">Sentinel-1 InSAR time-series analysis of ground deformation at Kenya's Olkaria geothermal field (2020--2024).</p></div>
     <div class="rc reveal"><span class="rc-tag td">Completed . MSc AIMS-Senegal</span><h3>Atmospheric Rivers and Surface Melting over the Pine Island Glacier in 1983 and 1998</h3><div class="rc-meta">AIMS-Senegal . 2021--2022</div><p class="rc-desc">Atmospheric rivers driving surface melting in West Antarctica. Mastercard Foundation Scholar.</p><a href="https://drive.google.com/drive/folders/1EChAvIUcMb2n6QWsJx3RQjyseSVFw1y9" target="_blank" rel="noopener" class="rc-link">View Thesis <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a></div>
   </div>
@@ -342,10 +360,15 @@ footer{text-align:center;padding:1.2rem;border-top:1px solid var(--border);font-
 <section class="section-alt">
   <div class="section-inner">
     <div class="section-label reveal">// Conferences & Training</div>
-    <div class="section-title reveal">Continuous Learning</div>
+    <div class="section-title reveal">Meetings, Talks & Training</div>
     <div class="eg">
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">EASY-ML School, University of Nairobi <span class="ec-up">Upcoming</span></div></div><div class="ec-date">13--27 Jan 2027</div></div><p class="ec-d">Teaching assistant at the East-African School for Young Researchers on Advanced Machine Learning Techniques, Chiromo Campus.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">2nd Rwanda Climate Science Symposium (RCSS 2026)</div></div><div class="ec-date">22--23 Sep 2026</div></div><p class="ec-d">Kigali. Attended the national symposium bringing together researchers, policymakers and practitioners working on climate science in Rwanda.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">GeoAI Africa Meetings</div></div></div><p class="ec-d">Presented my work on Sentinel-1 SAR and deep learning for flood mapping in Rwanda.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">PREAC AU Climate Meeting</div></div></div><p class="ec-d">Kigali, Rwanda. Took part in the climate meeting.</p></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Geodesy for a Resilient Africa Summer School</div></div><div class="ec-date">Jun--Jul 2026</div></div><p class="ec-d">AIMS-Cameroon, Limbe. Geodetic methods and applications in geoscience.</p></div>
-      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Imperial-AIMS Global Fellows Programme -- Accra</div></div><div class="ec-date">Jun 2026</div></div><p class="ec-d">Team Lead (PUM-CLID). LSTM heat forecast + CoolShade + CoolBand. Best Innovative Accelerator.</p></div>
+      <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">Imperial-AIMS Global Fellows Programme -- Accra</div></div><div class="ec-date">Jun 2026</div></div><p class="ec-d">Team Lead (PUM-CLID). LSTM heat forecast + CoolShade + CoolBand. Best Innovative Accelerator.</p>
+        <div class="ph-grid"><figure><img src="images/activities/accra-global-fellows-jun2026.jpg" alt="Stephen at Kwame Nkrumah Memorial Park, Accra, wearing a Global Fellows Programme T-shirt" loading="lazy"><figcaption>Accra, Jun 2026</figcaption></figure></div></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">EarthScope InSAR Processing (GMTSAR) + Seismology SBW</div></div><div class="ec-date">Jun--Aug 2026</div></div><p class="ec-d">Selected from 300+ applicants for InSAR course. 70-hour SSBW in scientific computing with seismic data.</p></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">AIMS-RIC Training School: Data Science Methods</div></div><div class="ec-date">Mar--Apr 2026</div></div><p class="ec-d">Oral presentation on SAR-Based Flood Mapping and Land-Cover Classification in Rwanda.</p></div>
       <div class="ec reveal"><div class="ec-h"><div><div class="ec-role">NASA ARSET: Fundamentals of Remote Sensing</div></div><div class="ec-date">Oct 2025</div></div><p class="ec-d">NASA Applied Remote Sensing Training Programme. Certificate awarded.</p></div>
