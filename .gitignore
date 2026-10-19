@@ -1,3 +1,6 @@
 _audit/
 PhD Award letter*.pdf
 Letter_Stephen*.pdf
+
+# Generated at deploy time by .github/workflows/pages.yml; never committed
+data/

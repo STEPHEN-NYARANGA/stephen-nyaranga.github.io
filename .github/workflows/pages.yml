@@ -1,0 +1,75 @@
+# Publishes the site to GitHub Pages and refreshes the public visitor map.
+# Every 6 hours (and on each push) it asks the site's GA4 property for one thing only:
+# active users per country for the last 30 days. The result is written into the
+# deployed site as data/visitor-map.json and is never committed to the repository.
+# Google sign-in uses Workload Identity Federation, so no key or secret is stored.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        name: Sign in to Google (read-only Analytics)
+        uses: google-github-actions/auth@v2
+        continue-on-error: true
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/analytics.readonly
+
+      - name: Fetch 30-day visitors by country
+        if: steps.auth.outcome == 'success'
+        env:
+          TOKEN: ${{ steps.auth.outputs.access_token }}
+        run: |
+          curl -sS -o report.json -X POST \
+            -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+            "https://analyticsdata.googleapis.com/v1beta/properties/559518151:runReport" \
+            -d '{"dateRanges":[{"startDate":"29daysAgo","endDate":"today"}],
+                 "dimensions":[{"name":"countryId"},{"name":"country"}],
+                 "metrics":[{"name":"activeUsers"}],
+                 "orderBys":[{"metric":{"metricName":"activeUsers"},"desc":true}],
+                 "limit":"300"}' || true
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          git archive HEAD | tar -x -C _site
+          rm -rf _site/.github
+          mkdir -p _site/data
+          python3 .github/scripts/build_visitor_map.py report.json _site/data/visitor-map.json
+          rm -f report.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

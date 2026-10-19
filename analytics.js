@@ -1,9 +1,14 @@
-/* Google Analytics 4 with opt-in consent and tracking for important links.
-   Nothing loads and no cookie is set until the visitor clicks "Accept".
-   Set GA_ID to the public Measurement ID (G-XXXXXXXXXX) of the GA4 web stream. */
+/* Google Analytics 4 for this site, without a consent pop-up.
+   - EU/EEA, UK and Switzerland: analytics cookies are off by default (Google Consent Mode
+     region default), so GA4 sets no cookies there unless the visitor turns analytics on.
+   - Elsewhere: GA4 runs with its standard first-party cookies.
+   - Anyone can turn analytics off or on from the footer "Analytics settings" link; a browser
+     Global Privacy Control signal, or choosing "off", stops GA4 from loading at all.
+   Advertising features and Google signals are disabled. */
 (function () {
   var GA_ID = 'G-S49913N5GN';
   var KEY = 'sn_analytics_consent';
+  var CONSENT_REGIONS = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH'];
   if (window.__snAnalytics) return;
   window.__snAnalytics = true;
 
@@ -14,15 +19,22 @@
   function setChoice(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
 
   var loaded = false, active = false;
-  function load() {
-    if (!GA_ID) return;
-    if (loaded) { active = true; window['ga-disable-' + GA_ID] = false; gtag('consent', 'update', { analytics_storage: 'granted' }); return; }
+  function load(granted) {
+    if (loaded) {
+      active = true;
+      window['ga-disable-' + GA_ID] = false;
+      if (granted) gtag('consent', 'update', { analytics_storage: 'granted' });
+      return;
+    }
     loaded = true;
-    window['ga-disable-' + GA_ID] = false;
     active = true;
+    window['ga-disable-' + GA_ID] = false;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { dataLayer.push(arguments); };
-    gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    var ads = { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' };
+    gtag('consent', 'default', Object.assign({ analytics_storage: 'denied', region: CONSENT_REGIONS }, ads));
+    gtag('consent', 'default', Object.assign({ analytics_storage: 'granted' }, ads));
+    if (granted) gtag('consent', 'update', { analytics_storage: 'granted' });
     gtag('js', new Date());
     var cfg = { allow_google_signals: false, allow_ad_personalization_signals: false };
     if (debug) cfg.debug_mode = true;
@@ -34,7 +46,6 @@
   }
 
   function revoke() {
-    if (!GA_ID) return;
     active = false;
     window['ga-disable-' + GA_ID] = true;
     if (window.gtag) gtag('consent', 'update', { analytics_storage: 'denied' });
@@ -48,38 +59,44 @@
     });
   }
 
-  // Consent banner
-  var banner = null;
-  function showBanner() {
-    if (banner) { banner.hidden = false; return; }
-    banner = document.createElement('div');
-    banner.className = 'consent';
-    banner.setAttribute('role', 'region');
-    banner.setAttribute('aria-label', 'Analytics consent');
-    banner.innerHTML = '<p>May I use Google Analytics cookies to count visits and see which links are useful? No advertising features are used. <a href="privacy.html">Privacy note</a></p>' +
-      '<div class="consent-btns"><button type="button" class="consent-no">Decline</button><button type="button" class="consent-yes">Accept</button></div>';
-    banner.querySelector('.consent-yes').addEventListener('click', function () { setChoice('granted'); banner.hidden = true; load(); });
-    banner.querySelector('.consent-no').addEventListener('click', function () { setChoice('denied'); banner.hidden = true; revoke(); });
-    document.body.appendChild(banner);
+  // Settings panel: opens only when the visitor clicks "Analytics settings".
+  var panel = null;
+  function stateText() {
+    var c = getChoice();
+    if (c === 'denied' || (!c && navigator.globalPrivacyControl)) return 'Analytics is currently off on this device.';
+    if (c === 'granted') return 'Analytics cookies are currently on.';
+    return 'Analytics is on by default; in the EU/EEA, UK and Switzerland it runs without cookies unless you turn cookies on.';
+  }
+  function showPanel() {
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.className = 'consent';
+      panel.setAttribute('role', 'dialog');
+      panel.setAttribute('aria-label', 'Analytics settings');
+      panel.innerHTML = '<p><span class="consent-state"></span> This site uses Google Analytics to count visits and see which links are useful; no advertising features are used. <a href="privacy.html">Privacy note</a></p>' +
+        '<div class="consent-btns"><button type="button" class="consent-no">Turn off</button><button type="button" class="consent-yes">Allow cookies</button><button type="button" class="consent-close" aria-label="Close">&times;</button></div>';
+      panel.querySelector('.consent-yes').addEventListener('click', function () { setChoice('granted'); load(true); panel.hidden = true; });
+      panel.querySelector('.consent-no').addEventListener('click', function () { setChoice('denied'); revoke(); panel.hidden = true; });
+      panel.querySelector('.consent-close').addEventListener('click', function () { panel.hidden = true; });
+      document.body.appendChild(panel);
+    }
+    panel.querySelector('.consent-state').textContent = stateText();
+    panel.hidden = false;
+    panel.querySelector('.consent-yes').focus();
   }
 
   function ready(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
-
-  // Without a Measurement ID the script does nothing and the settings links stay hidden.
-  if (!GA_ID) return;
   ready(function () {
     document.querySelectorAll('[data-analytics-settings]').forEach(function (el) { el.hidden = false; });
   });
-  // Any element with data-analytics-settings reopens the banner (footer link, privacy page).
   document.addEventListener('click', function (e) {
     var t = e.target.closest && e.target.closest('[data-analytics-settings]');
-    if (t) { e.preventDefault(); showBanner(); }
+    if (t) { e.preventDefault(); showPanel(); }
   });
+
   var choice = getChoice();
-  if (choice === 'granted') load();
-  else if (choice !== 'denied' && !navigator.globalPrivacyControl) {
-    ready(showBanner);
-  }
+  if (choice === 'granted') load(true);
+  else if (choice !== 'denied' && !navigator.globalPrivacyControl) load(false);
 
   // Link tracking: one delegated listener; links behave normally.
   var CATS = [

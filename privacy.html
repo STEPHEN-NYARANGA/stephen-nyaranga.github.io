@@ -25,7 +25,7 @@ button.settings:hover,button.settings:focus-visible{background:var(--accent-dark
 .consent[hidden]{display:none}.consent p{flex:1 1 260px;margin:0}
 .consent-btns{display:flex;gap:.5rem;margin-left:auto}
 .consent button{font:600 .8rem 'Nunito Sans',sans-serif;padding:.4rem 1rem;border-radius:20px;cursor:pointer;border:1px solid var(--accent)}
-.consent-no{background:transparent;color:var(--accent)}.consent-yes{background:var(--accent);color:#fff}
+.consent-no{background:transparent;color:var(--accent)}.consent-yes{background:var(--accent);color:#fff}.consent .consent-close{background:transparent;border-color:transparent;color:var(--text-muted);font-size:1.1rem;line-height:1;padding:.3rem .55rem}
 .consent button:hover,.consent button:focus-visible{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff;outline:none}
 @media(max-width:600px){main{padding:1.6rem 1.2rem}}
 </style>
@@ -37,19 +37,26 @@ button.settings:hover,button.settings:focus-visible{background:var(--accent-dark
   <p>This is the personal academic website of Stephen Nyaranga. It has no forms and no user accounts.</p>
 
   <h2>Visitor statistics</h2>
-  <p>If you agree, the site uses Google Analytics 4 to count visits. Nothing is loaded, and no analytics cookie is set, unless you click <b>Accept</b> in the banner. If your browser sends a Global Privacy Control signal, the banner is not shown and analytics stays off.</p>
-  <p>When it is enabled, Google Analytics records:</p>
+  <p>This site uses Google Analytics 4 to count visits. There is no pop-up; you can turn analytics off or on at any time with the <b>Analytics settings</b> button below or in the footer.</p>
+  <ul>
+    <li><b>Visitors in the EU/EEA, the UK and Switzerland:</b> analytics cookies are off by default. Google Analytics still receives basic, cookie-free signals (for example, that a page was viewed), but no analytics cookie is stored unless you choose <b>Allow cookies</b>.</li>
+    <li><b>Visitors elsewhere:</b> Google Analytics runs with its standard first-party cookies (<code>_ga</code>), which recognise a returning browser.</li>
+    <li>If you choose <b>Turn off</b>, or your browser sends a Global Privacy Control signal, Google Analytics is not loaded at all and its cookies are removed.</li>
+  </ul>
+  <p>Google Analytics records:</p>
   <ul>
     <li>pages viewed, approximate time on the page, and the referring website;</li>
     <li>device type, browser, and operating system;</li>
     <li>approximate location (country, region, and city), which Google derives from your IP address;</li>
     <li>clicks on the CV and certificate downloads, the project, profile and event links, and the email links. The email address itself is not recorded.</li>
   </ul>
-  <p>Google Signals and advertising features are switched off. Google Analytics does not log or store IP addresses. Statistics are viewed only in aggregate. No attempt is made to identify individual visitors, and visitor statistics are not published on this site.</p>
+  <p>Google Signals and advertising features are switched off. Google says Google Analytics 4 does not log or store IP addresses, but the data it processes can still count as personal data in some jurisdictions. No attempt is made to identify individual visitors.</p>
+  <h2>The public visitor map</h2>
+  <p>The homepage map shows only the number of visitors per country over the last 30 days, refreshed every few hours from the statistics above. Countries with fewer than 5 visitors are shown without an exact count. No individual visits, cities, times or other details are published; the detailed statistics stay private.</p>
   <p>See <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how Google uses information from sites that use its services</a> and the <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener">Google Analytics data-privacy overview</a>.</p>
 
   <h2>Changing your choice</h2>
-  <p>You can change your choice at any time. Declining removes the site's Google Analytics cookies from your browser.</p>
+  <p>Your choice is stored only in your browser. Turning analytics off removes this site's Google Analytics cookies.</p>
   <p><button type="button" class="settings" data-analytics-settings hidden>Analytics settings</button></p>
   <noscript><p class="muted">JavaScript is off, so no analytics runs.</p></noscript>
 
