@@ -1,6 +1,7 @@
 # Publishes the site to GitHub Pages and refreshes the public visitor map.
-# Every 6 hours (and on each push) it asks the site's GA4 property for one thing only:
-# active users per country for the last 30 days. The result is written into the
+# Every 3 hours (and on each push) it asks the site's GA4 property for one thing only:
+# active users per country for the last 30 days (plus the last 30 minutes, because
+# processed reports lag). The result is written into the
 # deployed site as data/visitor-map.json and is never committed to the repository.
 # Google sign-in uses Workload Identity Federation, so no key or secret is stored.
 name: Deploy site
@@ -9,7 +10,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "23 */6 * * *"
+    - cron: "23 */3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -50,6 +51,12 @@ jobs:
                  "metrics":[{"name":"activeUsers"}],
                  "orderBys":[{"metric":{"metricName":"activeUsers"},"desc":true}],
                  "limit":"300"}' || true
+          # Processed reports can lag by a day or two; realtime covers the last 30 minutes.
+          curl -sS -o realtime.json -X POST \
+            -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+            "https://analyticsdata.googleapis.com/v1beta/properties/559518151:runRealtimeReport" \
+            -d '{"dimensions":[{"name":"countryId"},{"name":"country"}],
+                 "metrics":[{"name":"activeUsers"}],"limit":"300"}' || true
 
       - name: Assemble site
         run: |
@@ -57,8 +64,8 @@ jobs:
           git archive HEAD | tar -x -C _site
           rm -rf _site/.github
           mkdir -p _site/data
-          python3 .github/scripts/build_visitor_map.py report.json _site/data/visitor-map.json
-          rm -f report.json
+          python3 .github/scripts/build_visitor_map.py report.json realtime.json _site/data/visitor-map.json
+          rm -f report.json realtime.json
 
       - uses: actions/upload-pages-artifact@v3
         with:

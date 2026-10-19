@@ -17,10 +17,6 @@
 
   function draw(data) {
     var rows = data.countries || [];
-    if (!rows.length) {
-      say('No visitor locations have been recorded in the last 30 days yet. The map fills in as data arrives.');
-      return;
-    }
     var table = new google.visualization.DataTable();
     // Latitude/longitude markers need no geocoding, so no Maps API key is used.
     table.addColumn('number', 'Latitude');
@@ -53,8 +49,10 @@
     var redraw;
     window.addEventListener('resize', function () { clearTimeout(redraw); redraw = setTimeout(function () { chart.draw(table, opts); }, 200); });
     status.hidden = true;
-    caption.textContent = 'Visitors from ' + rows.length + (rows.length === 1 ? ' country' : ' countries') +
-      ', ' + fmtDate(data.start_date) + ' to ' + fmtDate(data.end_date) + '. Updated ' +
+    caption.textContent = (rows.length
+      ? 'Visitors from ' + rows.length + (rows.length === 1 ? ' country' : ' countries') + ', '
+      : 'No visitor locations recorded yet for ') +
+      fmtDate(data.start_date) + ' to ' + fmtDate(data.end_date) + '. Updated ' +
       new Date(data.generated_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC.';
   }
 

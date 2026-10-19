@@ -1,11 +1,14 @@
-"""Turn a GA4 Data API runReport response into the public visitor-map file.
+"""Turn GA4 Data API responses into the public visitor-map file.
 
-Usage: python build_visitor_map.py <report.json or "-"> <output.json>
+Usage: python build_visitor_map.py <report.json> <realtime.json> <output.json>
 
-Only country code, country name and an active-user count for the last 30 days are
-written. Counts below MIN_COUNT are replaced by null so small numbers are not exposed.
-If the report is missing or is an error, a file with status "unavailable" is written so
-the homepage can say so instead of showing an empty or stale map.
+report.json is a runReport for the last 30 days (processed data, which can lag by
+up to a day or two); realtime.json is a runRealtimeReport for the last 30 minutes.
+Both are active users by country. Realtime visitors are inside the 30-day window, so
+each country gets the larger of the two counts (a lower bound; nothing is added twice).
+Only country code, name, centre point and count are written. Counts below MIN_COUNT
+are replaced by null so small numbers are not exposed. If the 30-day report is
+missing or is an error, status is "unavailable" so the homepage can say so.
 """
 import json
 import os
@@ -20,7 +23,23 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "country_cent
     CENTROIDS = json.load(_f)
 
 
-def main(src, dst):
+def read_rows(path):
+    """Return {code: (name, users)} from a report file; raises if missing or an error."""
+    with open(path, encoding="utf8") as f:
+        report = json.load(f)
+    if "error" in report:
+        raise ValueError("API error %s" % report["error"].get("code"))
+    rows = {}
+    for row in report.get("rows", []):
+        code, name = (d["value"] for d in row["dimensionValues"])
+        users = int(row["metricValues"][0]["value"])
+        code = code.upper()
+        if code in CENTROIDS and users > 0:  # skips "(not set)" and unknown codes
+            rows[code] = (name, users)
+    return rows
+
+
+def main(src, realtime_src, dst):
     today = datetime.now(PROPERTY_TZ).date()
     out = {
         "status": "unavailable",
@@ -31,16 +50,14 @@ def main(src, dst):
         "countries": [],
     }
     try:
-        with (sys.stdin if src == "-" else open(src, encoding="utf8")) as f:
-            report = json.load(f)
-        if "error" in report:
-            raise ValueError("API error %s" % report["error"].get("code"))
-        for row in report.get("rows", []):
-            code, name = (d["value"] for d in row["dimensionValues"])
-            users = int(row["metricValues"][0]["value"])
-            code = code.upper()
-            if code not in CENTROIDS or users <= 0:
-                continue  # skips "(not set)" and codes without a known centre point
+        merged = read_rows(src)
+        try:
+            for code, (name, users) in read_rows(realtime_src).items():
+                if users > merged.get(code, ("", 0))[1]:
+                    merged[code] = (merged.get(code, (name, 0))[0], users)
+        except Exception as exc:
+            print("realtime data skipped: %s" % type(exc).__name__, file=sys.stderr)
+        for code, (name, users) in sorted(merged.items(), key=lambda kv: -kv[1][1]):
             lat, lng = CENTROIDS[code]
             out["countries"].append({
                 "code": code,
@@ -58,4 +75,4 @@ def main(src, dst):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], sys.argv[3])
