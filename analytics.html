@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visitor Map — Stephen Nyaranga</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="images/favicon/favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32.png?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#1b6ca8;--accent-dark:#134e7a;--text-primary:#152231;--text-body:#364757;--text-muted:#8a9fb4;--border-light:#dde8f0;--bg-white:#fff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito Sans',sans-serif;line-height:1.7;color:var(--text-body);background:linear-gradient(135deg,#e8f4fd,#f0f6fb,#ddedf9);min-height:100vh;padding:2.5rem 1rem}
+main{max-width:1100px;margin:0 auto;background:rgba(255,255,255,.85);border:1px solid var(--border-light);border-radius:16px;padding:2rem}
+h1{font-family:'Playfair Display',serif;color:var(--text-primary);font-size:1.8rem;margin-bottom:.4rem}
+p{margin-bottom:.8rem}
+a{color:var(--accent)}a:hover{color:var(--accent-dark)}
+.back{display:inline-block;margin-bottom:1.2rem;font-weight:600;text-decoration:none}
+.note{font-size:.88rem;color:var(--text-body);background:rgba(27,108,168,.06);border:1px solid rgba(27,108,168,.16);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
+.frame{position:relative;width:100%;aspect-ratio:4/3;min-height:420px;border:1px solid var(--border-light);border-radius:12px;overflow:hidden;background:var(--bg-white)}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.frame .loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;color:var(--text-muted);font-size:.9rem}
+.open{display:inline-block;margin-top:1rem;font-weight:600;font-size:.9rem;padding:.45rem 1.1rem;border-radius:20px;border:1px solid var(--accent);color:var(--accent);text-decoration:none}
+.open:hover{background:var(--accent);color:#fff}
+.muted{color:var(--text-muted);font-size:.82rem}
+@media(max-width:600px){main{padding:1.3rem 1rem}.frame{aspect-ratio:3/4;min-height:520px}}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="./">&larr; Back to the website</a>
+  <h1>Visitor map</h1>
+  <p>This page shows Stephen Nyaranga's private visitor statistics: approximate visitor locations on a Google Map, plus link clicks and traffic sources.</p>
+  <div class="note"><b>Private.</b> The report is shared only with its owner's Google account, and every chart reads Google Analytics with the viewer's own permissions. Anyone else who opens this page sees Google's sign-in or "no access" message, not the data. Locations are approximate (country and region) and come only from visitors who accepted analytics cookies.</div>
+  <div class="frame">
+    <div class="loading">Loading the report&hellip; If nothing appears, sign in to the owner's Google account or use the link below.</div>
+    <iframe title="Website visitor analytics (private Data Studio report)" src="https://datastudio.google.com/embed/reporting/a7c180cf-bb85-4a53-9d1b-118fc28f6538/page/TlJ0C" loading="lazy" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+  </div>
+  <a class="open" href="https://datastudio.google.com/reporting/a7c180cf-bb85-4a53-9d1b-118fc28f6538" target="_blank" rel="noopener noreferrer">Open the full report in Data Studio</a>
+  <p class="muted" style="margin-top:1rem">If your browser blocks third-party sign-in inside embedded pages, the map can't load here; open it with the link above instead. Visits to this page are not tracked.</p>
+</main>
+</body>
+</html>
