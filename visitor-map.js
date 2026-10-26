@@ -29,8 +29,7 @@
       new Date(data.generated_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC.';
   }
 
-  // Fallback: Google GeoChart (no API key needed), used when no Maps key is configured
-  // or the Maps JavaScript API fails to load.
+  // Last-resort fallback: Google GeoChart (no API key), used if Leaflet cannot load.
   function drawGeoChart(data) {
     var rows = data.countries || [];
     var table = new google.visualization.DataTable();
@@ -78,6 +77,116 @@
     document.head.appendChild(s);
   }
 
+  // Keyboard- and touch-friendly list of countries below the map.
+  function buildList(data, rows, pick) {
+    var list = document.getElementById('visitorMapList');
+    if (!list) return;
+    list.innerHTML = '';
+    rows.forEach(function (r) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'vm-chip';
+      b.textContent = r.name + ' · ' + (r.users === null ? '<' + data.min_count : r.users);
+      b.setAttribute('aria-label', 'Zoom to ' + r.name + ', ' + label(data, r));
+      b.addEventListener('click', function () { pick(r); });
+      list.appendChild(b);
+    });
+    list.hidden = !rows.length;
+  }
+
+  function popupHtml(data, r) {
+    return '<div class="vm-tip"><b>' + esc(r.name) + '</b><br>' + label(data, r) +
+      '<br><span class="vm-tip-sub">' + fmtDate(data.start_date) + ' to ' + fmtDate(data.end_date) + '</span></div>';
+  }
+
+  // Free interactive map (Leaflet + OpenStreetMap), used when no Google Maps key is configured
+  // or Google Maps fails. Not Google imagery; attribution is shown on the map.
+  var LEAFLET = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/';
+  function loadLeaflet(data) {
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = LEAFLET + 'leaflet.min.css';
+    css.integrity = 'sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==';
+    css.crossOrigin = 'anonymous';
+    document.head.appendChild(css);
+    var s = document.createElement('script');
+    s.src = LEAFLET + 'leaflet.min.js';
+    s.integrity = 'sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==';
+    s.crossOrigin = 'anonymous';
+    s.onload = function () {
+      try { drawLeaflet(data); }
+      catch (e) { box.innerHTML = ''; box.classList.remove('vm-gmap'); if (data.status === 'ok') loadGeoChart(data); else say('The visitor map is temporarily unavailable.'); }
+    };
+    s.onerror = function () { if (data.status === 'ok') loadGeoChart(data); else say('The visitor map is temporarily unavailable.'); };
+    document.head.appendChild(s);
+  }
+
+  function drawLeaflet(data) {
+    var rows = (data.status === 'ok' && data.countries) || [];
+    box.classList.add('vm-gmap');
+    box.setAttribute('role', 'region');
+    box.setAttribute('aria-label', 'Interactive map of the countries website visitors came from in the last 30 days');
+    var map = L.map(box, { worldCopyJump: true, minZoom: 1, maxZoom: 12, scrollWheelZoom: false, zoomSnap: 0.25 });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    function boundsOf(list) {
+      return L.latLngBounds(list.map(function (r) { return [[r.bbox[1], r.bbox[0]], [r.bbox[3], r.bbox[2]]]; }).reduce(function (a, b) { return a.concat(b); }, []));
+    }
+    function showAll() {
+      map.closePopup();
+      if (rows.length) map.fitBounds(boundsOf(rows), { padding: [24, 24], maxZoom: 7 });
+      else map.setView([10, 20], 2);
+    }
+    var markers = rows.map(function (r) {
+      var m = L.circleMarker([r.lat, r.lng], {
+        radius: r.users === null ? 9 : Math.min(26, 9 + 3 * Math.sqrt(r.users)),
+        color: '#ffffff', weight: 2, fillColor: '#1b6ca8', fillOpacity: 0.85
+      }).addTo(map).bindPopup(popupHtml(data, r));
+      m.on('click', function () { focus(r); });
+      return m;
+    });
+    function focus(r) {
+      map.fitBounds(boundsOf([r]), { padding: [24, 24], maxZoom: 9 });
+      markers[rows.indexOf(r)].openPopup();
+    }
+    // Wheel zoom only after the visitor clicks the map, so page scrolling is not captured;
+    // it switches off again when the pointer leaves the map.
+    map.on('click', function () { map.scrollWheelZoom.enable(); });
+    map.on('mouseout', function () { map.scrollWheelZoom.disable(); });
+    // Controls: "All countries" overview and full screen.
+    var Ctl = L.Control.extend({
+      onAdd: function () {
+        var wrap = L.DomUtil.create('div', 'leaflet-bar vm-ctl');
+        var all = L.DomUtil.create('a', '', wrap);
+        all.href = '#'; all.role = 'button'; all.textContent = rows.length ? 'All countries' : 'World view';
+        all.title = 'Show all countries';
+        var fs = L.DomUtil.create('a', 'vm-fs', wrap);
+        fs.href = '#'; fs.role = 'button'; fs.title = 'Full screen'; fs.setAttribute('aria-label', 'Full screen'); fs.innerHTML = '&#x26F6;';
+        L.DomEvent.disableClickPropagation(wrap);
+        L.DomEvent.on(all, 'click', function (e) { L.DomEvent.preventDefault(e); showAll(); });
+        L.DomEvent.on(fs, 'click', function (e) {
+          L.DomEvent.preventDefault(e);
+          var el = box.closest('.vm-frame') || box;
+          if (document.fullscreenElement) document.exitFullscreen();
+          else if (el.requestFullscreen) el.requestFullscreen();
+        });
+        return wrap;
+      }
+    });
+    map.addControl(new Ctl({ position: 'topleft' }));
+    document.addEventListener('fullscreenchange', function () {
+      box.closest('.vm-frame').classList.toggle('vm-full', !!document.fullscreenElement);
+      setTimeout(function () { map.invalidateSize(); }, 100);
+    });
+    showAll();
+    buildList(data, rows, focus);
+    status.hidden = true;
+    if (data.status !== 'ok') caption.textContent = 'Visitor-location data is temporarily unavailable.';
+    else setCaption(data, rows);
+  }
+
   // Interactive Google Map: satellite / map views, zoom, pan, full screen, country bubbles.
   function drawGoogleMap(data) {
     var gm = google.maps;
@@ -93,6 +202,12 @@
       zoomControl: true, fullscreenControl: true, streetViewControl: false, rotateControl: false,
       cameraControl: false, gestureHandling: 'cooperative', clickableIcons: false
     });
+    // Wheel zoom without Ctrl once the visitor clicks the map (mouse users only);
+    // back to cooperative (Ctrl + wheel, two-finger touch) when the pointer leaves.
+    if (window.matchMedia && matchMedia('(pointer: fine)').matches) {
+      map.addListener('click', function () { map.setOptions({ gestureHandling: 'greedy' }); });
+      box.addEventListener('mouseleave', function () { map.setOptions({ gestureHandling: 'cooperative' }); });
+    }
     var info = new gm.InfoWindow();
     function boundsOf(list) {
       var b = new gm.LatLngBounds();
@@ -124,7 +239,7 @@
     map.addListener('zoom_changed', resize);
     function focus(r) {
       map.fitBounds(boundsOf([r]), 24);
-      info.setContent('<div class="vm-tip"><b>' + esc(r.name) + '</b><br>' + label(data, r) + '<br><span class="vm-tip-sub">last 30 days</span></div>');
+      info.setContent(popupHtml(data, r));
       info.setPosition({ lat: r.lat, lng: r.lng });
       info.open({ map: map });
     }
@@ -136,21 +251,7 @@
     reset.addEventListener('click', function () { info.close(); showAll(); });
     map.controls[gm.ControlPosition.TOP_LEFT].push(reset);
     gm.event.addListenerOnce(map, 'idle', function () { showAll(); resize(); });
-    // Keyboard- and touch-friendly list of countries below the map.
-    var list = document.getElementById('visitorMapList');
-    if (list) {
-      list.innerHTML = '';
-      rows.forEach(function (r) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'vm-chip';
-        b.textContent = r.name + ' · ' + (r.users === null ? '<' + data.min_count : r.users);
-        b.setAttribute('aria-label', 'Zoom to ' + r.name + ', ' + label(data, r));
-        b.addEventListener('click', function () { focus(r); });
-        list.appendChild(b);
-      });
-      list.hidden = !rows.length;
-    }
+    buildList(data, rows, focus);
     status.hidden = true;
     if (data.status !== 'ok') caption.textContent = 'Visitor-location data is temporarily unavailable.';
     else setCaption(data, rows);
@@ -165,7 +266,7 @@
       box.classList.remove('vm-gmap');
       var l = document.getElementById('visitorMapList');
       if (l) l.hidden = true;
-      if (data.status === 'ok') loadGeoChart(data); else say('The visitor map is temporarily unavailable.');
+      loadLeaflet(data);
     }
     window.gm_authFailure = fallback;  // invalid or unauthorised key
     window.__snMapsReady = function () {
@@ -185,8 +286,7 @@
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (d) {
         if (d.maps_key) return loadGoogleMap(d);
-        if (d.status !== 'ok') throw new Error('unavailable');
-        loadGeoChart(d);
+        loadLeaflet(d);
       })
       .catch(function () { say('The visitor map is temporarily unavailable.'); });
   }

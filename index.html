@@ -139,6 +139,10 @@ footer a{color:var(--text-secondary);text-decoration:none}footer a:hover,footer 
 .vm-chip{font:600 .78rem 'Nunito Sans',sans-serif;color:var(--accent);background:var(--bg-white);border:1px solid var(--accent-border);border-radius:20px;padding:.3rem .8rem;cursor:pointer}
 .vm-chip:hover,.vm-chip:focus-visible{background:var(--accent);color:#fff;border-color:var(--accent);outline:none}
 .vm-tip-sub{color:var(--text-muted);font-size:.74rem}
+.vm-ctl a{width:auto!important;min-width:30px;padding:0 .6rem;font:600 .78rem/30px 'Nunito Sans',sans-serif;color:var(--accent)!important;text-align:center}
+.vm-ctl a.vm-fs{font-size:1rem;padding:0}
+.vm-frame.vm-full{max-width:none;border-radius:0;padding:0;background:#000}.vm-frame.vm-full .vm-map.vm-gmap{height:100vh;border-radius:0}
+.vm-map .leaflet-popup-content{margin:.5rem .7rem}.vm-map .leaflet-popup-content .vm-tip{padding:0}
 @media(max-width:600px){.vm-map.vm-gmap{height:360px}}
 .vm-note{margin-top:.3rem;font-size:.78rem;color:var(--text-muted);max-width:900px}.vm-note a{color:var(--accent)}
 @media(max-width:900px){.visitors-section{padding:2.5rem 1.5rem}}
@@ -224,7 +228,7 @@ footer a{color:var(--text-secondary);text-decoration:none}footer a:hover,footer 
     </div>
     <div class="vm-list" id="visitorMapList" hidden></div>
     <p class="vm-caption" id="visitorMapCaption" aria-live="polite"></p>
-    <p class="vm-note">Visitor locations are approximate and show aggregated website traffic (Google Analytics active users by country) over the past 30 days, not live tracking. Countries with fewer than 5 active users show &ldquo;fewer than 5&rdquo; instead of an exact count. <a href="privacy.html">Privacy</a></p>
+    <p class="vm-note">Visitor locations are approximate and show aggregated website traffic (Google Analytics active users by country) over the past 30 days, not live tracking. Countries with fewer than 5 active users show &ldquo;fewer than 5&rdquo; instead of an exact count. Click the map to zoom with the mouse wheel; on touchscreens, pinch to zoom. <a href="privacy.html">Privacy</a></p>
   </div>
 </section>
 
