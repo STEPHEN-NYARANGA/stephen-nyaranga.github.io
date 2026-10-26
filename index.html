@@ -132,6 +132,14 @@ footer a{color:var(--text-secondary);text-decoration:none}footer a:hover,footer 
 .vm-tip{font:400 .82rem 'Nunito Sans',sans-serif;color:var(--text-body);padding:.45rem .65rem;white-space:nowrap}.vm-tip b{color:var(--text-primary)}
 .vm-map .google-visualization-tooltip{border-radius:8px;box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
 .vm-map .google-visualization-tooltip-item:first-child:not(:last-child){display:none}.vm-map .google-visualization-tooltip-item-list{margin:0;padding:0}.vm-map .google-visualization-tooltip-item{margin:0;padding:0}
+.vm-map.vm-gmap{aspect-ratio:auto;height:440px;border-radius:10px;overflow:hidden}
+.vm-reset{margin:10px;font:600 .8rem 'Nunito Sans',sans-serif;color:var(--accent);background:#fff;border:0;border-radius:2px;box-shadow:0 1px 4px rgba(0,0,0,.3);padding:.55rem .8rem;cursor:pointer}
+.vm-reset:hover,.vm-reset:focus-visible{background:var(--accent);color:#fff;outline:none}
+.vm-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;max-width:900px}.vm-list[hidden]{display:none}
+.vm-chip{font:600 .78rem 'Nunito Sans',sans-serif;color:var(--accent);background:var(--bg-white);border:1px solid var(--accent-border);border-radius:20px;padding:.3rem .8rem;cursor:pointer}
+.vm-chip:hover,.vm-chip:focus-visible{background:var(--accent);color:#fff;border-color:var(--accent);outline:none}
+.vm-tip-sub{color:var(--text-muted);font-size:.74rem}
+@media(max-width:600px){.vm-map.vm-gmap{height:360px}}
 .vm-note{margin-top:.3rem;font-size:.78rem;color:var(--text-muted);max-width:900px}.vm-note a{color:var(--accent)}
 @media(max-width:900px){.visitors-section{padding:2.5rem 1.5rem}}
 .ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-top:1rem}
@@ -214,8 +222,9 @@ footer a{color:var(--text-secondary);text-decoration:none}footer a:hover,footer 
       <div class="vm-map" id="visitorMap" role="img" aria-label="World map with dots for the countries visitors came from in the last 30 days"></div>
       <p class="vm-status" id="visitorMapStatus" role="status">Loading visitor map…</p>
     </div>
+    <div class="vm-list" id="visitorMapList" hidden></div>
     <p class="vm-caption" id="visitorMapCaption" aria-live="polite"></p>
-    <p class="vm-note">Visitor locations are approximate and represent aggregated website traffic over the past 30 days. Countries with very few visitors show &ldquo;fewer than 5&rdquo; instead of an exact count. <a href="privacy.html">Privacy</a></p>
+    <p class="vm-note">Visitor locations are approximate and show aggregated website traffic (Google Analytics active users by country) over the past 30 days, not live tracking. Countries with fewer than 5 active users show &ldquo;fewer than 5&rdquo; instead of an exact count. <a href="privacy.html">Privacy</a></p>
   </div>
 </section>
 

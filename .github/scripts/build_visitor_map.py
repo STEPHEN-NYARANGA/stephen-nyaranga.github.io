@@ -21,6 +21,11 @@ PROPERTY_TZ = timezone(timedelta(hours=2))  # GA4 property reporting time zone (
 # Approximate country centre points, from Google's DSPL canonical countries table.
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "country_centroids.json"), encoding="utf8") as _f:
     CENTROIDS = json.load(_f)
+# Country bounding boxes [west, south, east, north], public domain (sandstrom/country-bounding-boxes,
+# derived from Natural Earth). Used only to frame the map; countries missing here get a box
+# around their centre point.
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "country_bounds.json"), encoding="utf8") as _f:
+    BOUNDS = json.load(_f)
 
 
 def read_rows(path):
@@ -47,6 +52,7 @@ def main(src, realtime_src, dst):
         "end_date": today.isoformat(),
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "min_count": MIN_COUNT,
+        "metric": "active users",
         "countries": [],
     }
     try:
@@ -59,16 +65,22 @@ def main(src, realtime_src, dst):
             print("realtime data skipped: %s" % type(exc).__name__, file=sys.stderr)
         for code, (name, users) in sorted(merged.items(), key=lambda kv: -kv[1][1]):
             lat, lng = CENTROIDS[code]
+            bbox = BOUNDS.get(code) or [lng - 2, lat - 2, lng + 2, lat + 2]
             out["countries"].append({
                 "code": code,
                 "name": name,
                 "lat": lat,
                 "lng": lng,
+                "bbox": bbox,
                 "users": users if users >= MIN_COUNT else None,
             })
         out["status"] = "ok"
     except Exception as exc:  # report the failure without leaking the response
         print("visitor map unavailable: %s" % type(exc).__name__, file=sys.stderr)
+    # Restricted browser key for the Maps JavaScript API (a public, referrer-locked key, not a
+    # secret); kept in a repository variable so it is never committed.
+    if os.environ.get("GMAPS_BROWSER_KEY"):
+        out["maps_key"] = os.environ["GMAPS_BROWSER_KEY"]
     with open(dst, "w", encoding="utf8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
     print("status=%s countries=%d" % (out["status"], len(out["countries"])))

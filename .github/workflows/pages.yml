@@ -59,6 +59,8 @@ jobs:
                  "metrics":[{"name":"activeUsers"}],"limit":"300"}' || true
 
       - name: Assemble site
+        env:
+          GMAPS_BROWSER_KEY: ${{ vars.GMAPS_BROWSER_KEY }}
         run: |
           mkdir -p _site
           git archive HEAD | tar -x -C _site
