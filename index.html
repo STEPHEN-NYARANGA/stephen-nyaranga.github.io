@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#14212b;--text:#33424d;--muted:#6b7a86;--line:#e2e6e9;--bg:#fff;--bg-alt:#f4f5f2;--navy:#0c2233;--navy-2:#12344d;--sky:#8cc4ea;--accent:#1b6ca8;--accent-dark:#134e7a;--accent-soft:rgba(27,108,168,.08);--accent-border:rgba(27,108,168,.22);--amber:#a8641c;--amber-soft:rgba(168,100,28,.08);--amber-border:rgba(168,100,28,.24);--font-display:'Oswald','Arial Narrow',sans-serif;--font-body:'Source Sans 3','Segoe UI',system-ui,-apple-system,sans-serif;
+:root{--ink:#14212b;--text:#33424d;--muted:#6b7a86;--line:#e2e6e9;--bg:#fff;--bg-alt:#edf2f6;--navy:#0c2233;--navy-2:#12344d;--sky:#8cc4ea;--accent:#1b6ca8;--accent-dark:#134e7a;--accent-soft:rgba(27,108,168,.08);--accent-border:rgba(27,108,168,.22);--amber:#a8641c;--amber-soft:rgba(168,100,28,.08);--amber-border:rgba(168,100,28,.24);--font-display:'Oswald','Arial Narrow',sans-serif;--font-body:'Source Sans 3','Segoe UI',system-ui,-apple-system,sans-serif;
 /* older names still used by inline styles and scripts */--text-primary:var(--ink);--text-body:var(--text);--text-secondary:var(--muted);--text-muted:#8593a0;--border:var(--line);--border-light:var(--line);--bg-white:#fff;--bg-base:var(--bg-alt);--accent-bg:var(--accent-soft);--shadow-sm:0 1px 2px rgba(20,33,43,.05);--shadow-md:0 6px 20px rgba(20,33,43,.07);--shadow-lg:0 12px 32px rgba(20,33,43,.10)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:68px}
@@ -328,6 +328,96 @@ body{font-size:16px}
 .vm-map.vm-gmap{height:360px}
 .rc{padding:1.3rem 1.2rem}
 }
+
+/* ---- calmer middle sections: no icons, boxes, chips or underlines ---- */
+.sec-title::after{display:none}
+#about .sec-title::after,.cs .sec-title::after{display:block}
+.sec:not(#about):not(#contact) a:not(.btn){text-decoration:none}
+.sec:not(#about):not(#contact) a:not(.btn):hover{color:var(--accent-dark)}
+.news-list a{text-decoration:none;color:var(--sky)}.news-list a:hover{color:#fff}
+.news-up{display:inline;margin-left:.35rem;padding:0;background:none;color:var(--sky);font-size:.72rem;letter-spacing:.12em}
+.news-up::before{content:'· '}
+
+/* research interests */
+.int-grid{gap:2.6rem 2.4rem}
+.int-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:3rem;align-items:center;margin:0 0 3.4rem}
+.int-fig{margin:0}
+.int-fig img{display:block;width:100%;height:auto;border-radius:2px}
+.int-fig figcaption{margin-top:.55rem;font-size:.82rem;line-height:1.5;color:var(--muted)}
+.quote{margin:0}
+.quote p:first-child{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.22;letter-spacing:.01em;color:var(--ink)}
+.quote-by{margin-top:1rem;font-family:var(--font-display);font-size:.88rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.int{background:none;border:0;border-radius:0;padding:0}
+.int h3{margin-bottom:.6rem}
+.tools{display:block;margin-top:2.6rem;font-size:.98rem;color:var(--text)}
+.tools-l{margin-right:.6rem}
+.tools .sk-tag{display:inline;padding:0;border:0;background:none;font-size:inherit;color:inherit}
+.tools .sk-tag:not(:last-child)::after{content:' · ';color:var(--muted)}
+
+/* research entries */
+.rc{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:2rem 0 .4rem;margin:0}
+.sec-head+.rc{border-top:0;padding-top:0}
+.proj-tag,.rc-tag,.tc,.td{background:none;border:0;padding:0;border-radius:0;font-size:.74rem;letter-spacing:.14em}
+.tc{color:var(--accent)}.td{color:var(--amber)}
+.ph-grid figure{background:none;border:0;border-radius:0}
+.ph-grid img{border-radius:2px}
+.ph-grid figcaption{padding:.45rem 0 0}
+
+/* education as a CV-style list: dates on the left */
+.timeline{padding-left:0}
+.timeline::before,.tl::before{display:none}
+.tl{display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:2rem;margin:0;padding:1.6rem 0;border-top:1px solid var(--line)}
+.tl:first-child{border-top:0;padding-top:0}
+.tl>*{grid-column:2}
+.tl>.tl-date{grid-column:1;grid-row:1/span 8;padding-top:.3rem}
+.tl-dis{background:none!important;border:0;border-radius:0;padding:0;margin-top:.55rem}
+.tl-badge{display:block;margin:.45rem 0 0;padding:0;background:none!important;border:0!important;border-radius:0;font-size:.9rem;font-weight:600;font-style:italic;letter-spacing:0}
+.tl-acts{display:block;margin-top:.45rem;font-size:.92rem;color:var(--muted)}
+.tl-act{display:inline;padding:0;background:none;border:0;font-size:inherit;font-weight:400;color:inherit}
+.tl-act:not(:last-child)::after{content:' · '}
+
+/* experience and talks */
+.ec-type,.ec-up{margin-left:.5rem;padding:0;background:none;border:0;border-radius:0;font-size:.7rem;letter-spacing:.12em;vertical-align:1px}
+.ec-type{color:var(--muted)}.ec-up{color:var(--amber)}
+
+/* projects */
+.proj-grid{gap:2.6rem 2rem}
+.proj-card{background:none;border:0;border-radius:0;overflow:visible}
+.proj-card:hover{box-shadow:none}
+.proj-preview{border:0;border-radius:2px;background:#fff}
+.proj-body{padding:1rem 0 0}
+.proj-link:hover,.rc-link:hover{text-decoration:none;color:var(--accent-dark)}
+
+/* supervision, skills, awards, leadership, affiliations */
+.sv-card{background:none;border:0;border-radius:0;padding:0}
+.sk-grid{display:block}
+.sk{display:grid;grid-template-columns:200px minmax(0,1fr);gap:2rem;background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:1rem 0}
+.sk:first-child{border-top:0;padding-top:0}
+.sk-t{margin:0;padding-top:.1rem}
+.sk-tags{display:block}
+.sk-tag{display:inline;padding:0;border:0;background:none;font-size:1rem;color:var(--text)}
+.sk-tag:not(:last-child)::after{content:', '}
+.ai{display:block;padding:1.1rem 0}
+.lg{gap:2rem 2.6rem}
+.lc{display:block;background:none;border:0;border-radius:0;padding:0}
+.mt{display:block;columns:2 260px;column-gap:2.6rem}
+.mtag{display:block;padding:.3rem 0;border:0;border-radius:0;background:none;font-weight:400;font-size:1rem;break-inside:avoid}
+
+/* visitor map */
+.visitors-section .vm-frame{background:none;border:0;border-radius:0;padding:0}
+.vm-list{gap:.3rem 1.4rem}
+.vm-chip{background:none;border:0;padding:0;font-weight:600}
+.vm-chip:hover,.vm-chip:focus-visible{background:none;color:var(--accent-dark)}
+
+@media(max-width:860px){
+.int-hero{grid-template-columns:1fr;gap:1.6rem}
+}
+@media(max-width:600px){
+.tl{display:block}
+.tl>.tl-date{padding-top:0}
+.sk{display:block}
+.sk-t{margin-bottom:.35rem}
+}
 </style>
 </head>
 <body>
@@ -437,11 +527,21 @@ body{font-size:16px}
 <section id="interests" class="sec">
   <div class="section-inner">
     <div class="sec-head reveal"><h2 class="sec-title">Research Interests</h2><p class="sec-lead">Satellite technology, including radar (SAR), InSAR, optical imagery and GNSS, applied to practical problems.</p></div>
+    <div class="int-hero reveal">
+      <figure class="int-fig">
+        <img src="images/nisar-in-orbit.webp" alt="The NISAR radar satellite, with its large drum-shaped antenna reflector, orbiting above Earth" width="1400" height="788" loading="lazy" decoding="async">
+        <figcaption>NISAR, the NASA&ndash;ISRO radar satellite launched in July 2025, in orbit (artist's concept). Image: NASA/JPL-Caltech.</figcaption>
+      </figure>
+      <blockquote class="quote">
+        <p>&ldquo;The Earth of wonders that is alive.&rdquo;</p>
+        <p class="quote-by">Stephen Nyaranga</p>
+      </blockquote>
+    </div>
     <div class="int-grid">
-      <article class="int reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg></span><h3>Disasters &amp; Early Warning</h3><p>Mapping floods with Sentinel-1 radar and measuring ground deformation from earthquakes, volcanoes and landslides with InSAR, to support early warning and response.</p></article>
-      <article class="int reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-sprout"/></svg></span><h3>Agriculture &amp; Food Security</h3><p>Monitoring crops, soil moisture and land use with radar and optical time series, to give farmers and planners timely information.</p></article>
-      <article class="int reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg></span><h3>Energy</h3><p>Tracking ground movement at geothermal fields and energy infrastructure with InSAR. My MSc thesis used Sentinel-1 InSAR to study deformation at Kenya's Olkaria geothermal field (2020–2024).</p></article>
-      <article class="int reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-drop"/></svg></span><h3>Climate, Water &amp; Cities</h3><p>Combining Earth observation with AI to study floods, water resources and urban resilience, and to strengthen weather and climate services in Africa.</p></article>
+      <article class="int reveal"><h3>Disasters &amp; Early Warning</h3><p>Mapping floods with Sentinel-1 radar and measuring ground deformation from earthquakes, volcanoes and landslides with InSAR, to support early warning and response.</p></article>
+      <article class="int reveal"><h3>Agriculture &amp; Food Security</h3><p>Monitoring crops, soil moisture and land use with radar and optical time series, to give farmers and planners timely information.</p></article>
+      <article class="int reveal"><h3>Energy</h3><p>Tracking ground movement at geothermal fields and energy infrastructure with InSAR. My MSc thesis used Sentinel-1 InSAR to study deformation at Kenya's Olkaria geothermal field (2020–2024).</p></article>
+      <article class="int reveal"><h3>Climate, Water &amp; Cities</h3><p>Combining Earth observation with AI to study floods, water resources and urban resilience, and to strengthen weather and climate services in Africa.</p></article>
     </div>
     <div class="tools reveal"><span class="tools-l">Tools I use</span><span class="sk-tag">Sentinel-1 SAR</span><span class="sk-tag">InSAR (GMTSAR)</span><span class="sk-tag">Optical EO</span><span class="sk-tag">GNSS / GPS geodesy</span><span class="sk-tag">Deep learning</span><span class="sk-tag">Python</span></div>
   </div>
@@ -577,7 +677,6 @@ body{font-size:16px}
         </div>
       </div>
       <div class="proj-card reveal">
-        <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b5702a,#d4923c);color:#fff;font-size:1.1rem;font-weight:700;text-align:center;padding:1rem">Item Detection<br><span style="font-size:.8rem;font-weight:400;opacity:.8">High School STEM Demo</span></div>
         <div class="proj-body">
           <span class="proj-tag td">Computer Vision · Education</span>
           <h3>Object Detection Demo for High Schools</h3>
@@ -585,7 +684,6 @@ body{font-size:16px}
         </div>
       </div>
       <div class="proj-card reveal">
-        <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1b6ca8,#3a9fd4);color:#fff;font-size:1.1rem;font-weight:700;text-align:center;padding:1rem">AXIOM Research<br><span style="font-size:.8rem;font-weight:400;opacity:.8">axiomresearchs.org</span></div>
         <div class="proj-body">
           <span class="proj-tag tc">Web Dev · Organization</span>
           <h3>AXIOM Research Group Website</h3>
@@ -657,14 +755,14 @@ body{font-size:16px}
   <div class="section-inner">
     <div class="sec-head reveal"><h2 class="sec-title">Awards &amp; Honours</h2></div>
     <div class="al">
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg></span><div><h4>Certificate of Appreciation – Oral Presenter</h4><p>2nd Rwanda Climate Science Symposium, Kigali · Sep 2026 · <a href="certificates/rcss2026-certificate-of-appreciation-oral-presenter.pdf" target="_blank" rel="noopener">View PDF</a></p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-award"/></svg></span><div><h4>Best Innovative Accelerator Project (Team PUM-CLID)</h4><p>Imperial-AIMS Global Fellows, Accra · Jun 2026</p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-award"/></svg></span><div><h4>Best Project Award – TembeaAfrica AI</h4><p>AIMS-RIC Doctoral Training School · 2026</p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg></span><div><h4>Intro Linux & GMT Micro-Credential</h4><p>EarthScope / Miami University Geology (SSBW) · Jun 2026</p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-award"/></svg></span><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Competition · Jul 2024</p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship, MSc at AIMS-Senegal · 2021–2022</p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg></span><div><h4>NASA ARSET Certificate</h4><p>Fundamentals of Remote Sensing · Oct 2025</p></div></div>
-      <div class="ai reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></span><div><h4>Techstars Startup Weekend</h4><p>Business participant, Dedan Kimathi University · Sep 2019</p></div></div>
+      <div class="ai reveal"><div><h4>Certificate of Appreciation – Oral Presenter</h4><p>2nd Rwanda Climate Science Symposium, Kigali · Sep 2026 · <a href="certificates/rcss2026-certificate-of-appreciation-oral-presenter.pdf" target="_blank" rel="noopener">View PDF</a></p></div></div>
+      <div class="ai reveal"><div><h4>Best Innovative Accelerator Project (Team PUM-CLID)</h4><p>Imperial-AIMS Global Fellows, Accra · Jun 2026</p></div></div>
+      <div class="ai reveal"><div><h4>Best Project Award – TembeaAfrica AI</h4><p>AIMS-RIC Doctoral Training School · 2026</p></div></div>
+      <div class="ai reveal"><div><h4>Intro Linux & GMT Micro-Credential</h4><p>EarthScope / Miami University Geology (SSBW) · Jun 2026</p></div></div>
+      <div class="ai reveal"><div><h4>Best 3-Minute Thesis Award</h4><p>ICTP-EAIFR PhD & Master's Competition · Jul 2024</p></div></div>
+      <div class="ai reveal"><div><h4>Mastercard Foundation Scholarship</h4><p>Full scholarship, MSc at AIMS-Senegal · 2021–2022</p></div></div>
+      <div class="ai reveal"><div><h4>NASA ARSET Certificate</h4><p>Fundamentals of Remote Sensing · Oct 2025</p></div></div>
+      <div class="ai reveal"><div><h4>Techstars Startup Weekend</h4><p>Business participant, Dedan Kimathi University · Sep 2019</p></div></div>
     </div>
   </div>
 </section>
@@ -673,12 +771,12 @@ body{font-size:16px}
   <div class="section-inner">
     <div class="sec-head reveal"><h2 class="sec-title">Leadership &amp; Service</h2></div>
     <div class="lg">
-      <div class="lc reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></span><div><h4>AXIOM Research Group</h4><div class="org">AIMS-RIC · Current</div><p>Member; built the organization's website.</p></div></div>
-      <div class="lc reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-ballot"/></svg></span><div><h4>Chairman, Electoral Commission</h4><div class="org">Karatina University · 2019/2020</div><p>Planned and coordinated general student elections.</p></div></div>
-      <div class="lc reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></span><div><h4>Class Rep (4 years)</h4><div class="org">Karatina University · 2016–2020</div><p>Represented Education Science students. Electoral college member.</p></div></div>
-      <div class="lc reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span><div><h4>Peer Counsellor</h4><div class="org">Karatina University · 2017–2020</div><p>Guidance and emotional support for fellow students.</p></div></div>
-      <div class="lc reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-coins"/></svg></span><div><h4>Treasurer, Christian Union</h4><div class="org">Karatina University · 2017–2018</div><p>Managed finances for the ushering department.</p></div></div>
-      <div class="lc reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><div><h4>Programming Trainer</h4><div class="org">Don Bosco, Karen · 2019</div><p>Volunteered to teach coding to underprivileged children.</p></div></div>
+      <div class="lc reveal"><div><h4>AXIOM Research Group</h4><div class="org">AIMS-RIC · Current</div><p>Member; built the organization's website.</p></div></div>
+      <div class="lc reveal"><div><h4>Chairman, Electoral Commission</h4><div class="org">Karatina University · 2019/2020</div><p>Planned and coordinated general student elections.</p></div></div>
+      <div class="lc reveal"><div><h4>Class Rep (4 years)</h4><div class="org">Karatina University · 2016–2020</div><p>Represented Education Science students. Electoral college member.</p></div></div>
+      <div class="lc reveal"><div><h4>Peer Counsellor</h4><div class="org">Karatina University · 2017–2020</div><p>Guidance and emotional support for fellow students.</p></div></div>
+      <div class="lc reveal"><div><h4>Treasurer, Christian Union</h4><div class="org">Karatina University · 2017–2018</div><p>Managed finances for the ushering department.</p></div></div>
+      <div class="lc reveal"><div><h4>Programming Trainer</h4><div class="org">Don Bosco, Karen · 2019</div><p>Volunteered to teach coding to underprivileged children.</p></div></div>
     </div>
   </div>
 </section>
