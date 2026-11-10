@@ -102,9 +102,12 @@
   var CATS = [
     [/(^|\.)linkedin\.com$/, 'linkedin'],
     [/(^|\.)orcid\.org$/, 'orcid'],
+    [/(^|\.)researchgate\.net$/, 'researchgate'],
+    [/(^|\.)clarity-africa\.org$|(^|\.)imperial\.ac\.uk$|(^|\.)aimsric\.org$|(^|\.)jkuat\.ac\.ke$/, 'institution'],
     [/(^|\.)github\.(com|io)$|\.vercel\.app$|\.netlify\.app$|\.hf\.space$|(^|\.)huggingface\.co$/, 'project'],
     [/(^|\.)drive\.google\.com$/, 'thesis'],
-    [/(^|\.)indico\.|(^|\.)acmad\.org$/, 'event']
+    [/(^|\.)indico\.|(^|\.)acmad\.org$/, 'event'],
+    [/(^|\.)sway\.cloud\.microsoft$|(^|\.)sway\.office\.com$/, 'newsletter']
   ];
   function category(host) {
     for (var i = 0; i < CATS.length; i++) if (CATS[i][0].test(host)) return CATS[i][1];
@@ -119,7 +122,7 @@
     var s = a.closest('section');
     if (!s) return 'other';
     if (s.id) return s.id;
-    var h = s.querySelector('.section-label');
+    var h = s.querySelector('.sec-title');
     return h ? h.textContent.replace(/[^A-Za-z&]+/g, ' ').trim().toLowerCase().slice(0, 40) : 'other';
   }
 
